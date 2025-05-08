@@ -9,6 +9,7 @@ export function Art(_: Propless) {
       <mesh
         castShadow
         receiveShadow
+        // @ts-ignore
         geometry={nodes.Plane.geometry}
         material={materials["Material.001"]}
       />

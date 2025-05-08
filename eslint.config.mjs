@@ -44,6 +44,7 @@ export default [
     rules: {
       "no-undef": "off",
       "prettier/prettier": "error",
+      "@next/next/no-img-element": 0,
       "@typescript-eslint/ban-ts-comment": 0,
       "@typescript-eslint/no-explicit-any": 0,
       "@typescript-eslint/no-extraneous-class": 0,

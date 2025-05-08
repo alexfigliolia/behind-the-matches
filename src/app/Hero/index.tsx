@@ -18,7 +18,7 @@ export const Hero = (_: Propless) => {
       <div className="content">
         <BoundedContent>
           <h1>Behind the matches</h1>
-          <Button text="Customize" />
+          <Button text="Customize" onClick={() => {}} />
         </BoundedContent>
       </div>
     </Section>

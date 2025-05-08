@@ -38,7 +38,7 @@ export const Info = (_: Propless) => {
             <p>
               Hand-crafted shadow boxes highlighting the places you&apos;ve been
             </p>
-            <Button text="Customize" />
+            <Button text="Customize" onClick={() => {}} />
           </figcaption>
         </figure>
       </BoundedContent>
