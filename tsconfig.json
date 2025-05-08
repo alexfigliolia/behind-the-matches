@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,10 +22,43 @@
         "name": "next"
       }
     ],
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./src/*"]
+      "3D/*": [
+        "./3D/*"
+      ],
+      "Components/*": [
+        "./Components/*"
+      ],
+      "Declarations/*": [
+        "./Declarations/*"
+      ],
+      "Hooks/*": [
+        "./Hooks/*"
+      ],
+      "Icons/*": [
+        "./Icons/*"
+      ],
+      "Styles/*": [
+        "./Styles/*"
+      ],
+      "Tools/*": [
+        "./Tools/*"
+      ],
+      "Types/*": [
+        "./Types/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "**/*.mjs",
+    ".prettierrc.mjs"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

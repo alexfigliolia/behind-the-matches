@@ -1,0 +1,52 @@
+@use "Styles/Variables";
+
+.main-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  height: var(--header-height);
+  @include Variables.center;
+  &>div {
+    --inner-width: calc(100% - calc(var(--layout-padding) * 2));
+    height: calc(var(--header-height) - var(--layout-padding) * 2);
+    width: var(--inner-width);
+    border-radius: 0.5em;
+    max-width: 1000px;
+    @include Variables.center;
+    background-color: rgba(#fff, 0.65);
+    backdrop-filter: blur(5px);
+    &>div {
+      height: 100%;
+      width: var(--inner-width);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &>h1 {
+        margin: 0;
+        color: #000;
+        font-family: var(--font-funnel-display);
+        transition: color 0.3s;
+        @media (min-width: 670px) {
+          font-size: 2.25em;
+        }
+      }
+      &>.burger {
+        --color: #000;
+        @media (min-width: 670px) {
+          font-size: 1.25em;
+        }
+        @media (min-width: 750px) {
+          display: none;
+        }
+      }
+      &>.nav {
+        display: none;
+        @media (min-width: 750px) {
+          display: block;
+        }
+      }
+    }
+  }
+}

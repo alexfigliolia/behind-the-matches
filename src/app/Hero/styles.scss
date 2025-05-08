@@ -1,0 +1,69 @@
+@use "Styles/Variables";
+
+.hero {
+  height: 100vh;
+  height: 100svh;
+  position: relative;
+  @include Variables.center;
+  margin-bottom: 10vh;
+  &>.canvas,
+  &>.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    @include Variables.center;
+  }
+  &>.canvas {
+    height: 90%;
+    & canvas {
+      overflow: scroll;
+    }
+    @media (min-width: 957px) {
+      top: 5%;
+      height: 95%;
+      width: 70%;
+    }
+  }
+  &>.content {
+    z-index: 2;
+    pointer-events: none;
+    &>.bounded-content {
+      height: 90%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      margin-bottom: 5vw;
+      @media (min-width: 957px) {
+        justify-content: center;
+        margin-left: 20vw;
+        margin-top: 5%;
+      }
+      &>h1 {
+        margin: 0;
+        line-height: 0.75;
+        text-align: center;
+        letter-spacing: -0.025em;
+        user-select: none;
+        font-size: min(15vh, 18vw, 120px);
+        font-family: var(--font-monte-carlo);
+        text-shadow: 0.05em 0.05em 0em #fff;
+      }
+      &>button {
+        display: none;
+        @media (min-width: 957px) {
+          display: block;
+          margin-left: 15vw;
+          margin-top: 1.5em;
+          pointer-events: all;
+        }
+        @media (min-width: 1500px) {
+          margin-left: 5vw;
+        }
+      }
+    }
+  }
+}

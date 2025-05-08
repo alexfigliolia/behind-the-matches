@@ -1,0 +1,43 @@
+
+.nav > ul {
+  --color: #000;
+  gap: 2em;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  & a {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--color);
+    text-decoration: none;
+    position: relative;
+    font-family: var(--font-funnel-display);
+    &> * {
+      pointer-events: none;
+    }
+    &:visited {
+      color: var(--color);
+      text-decoration: none;
+    }
+    &::after {
+      content: "";
+      top: 100%;
+      left: 0;
+      scale: 0 1;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      border-radius: 1px;
+      background-color: var(--color);
+      transition-duration: 0.4s;
+    }
+    &:hover,
+    &.active {
+      &::after {
+        scale: 1 1;
+      }
+    }
+  }
+}
