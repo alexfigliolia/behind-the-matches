@@ -1,0 +1,24 @@
+@use "Styles/Variables";
+
+.footer {
+  width: 100%;
+  background-color: #1c1a1a;
+  color: #fff;
+  @include Variables.center;
+  flex-direction: column;
+  gap: 2em;
+  padding: 4em 0;
+  &>h2 {
+    font-family: var(--font-monte-carlo);
+    font-size: max(min(8vh, 8vw), 2em);
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+    font-weight: 800;
+  }
+  &>.nav > ul {
+    --color: #fff;
+    gap: 1.5em;
+    flex-wrap: wrap;
+  }
+}

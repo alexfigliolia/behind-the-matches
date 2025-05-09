@@ -1,6 +1,4 @@
-import { Gallery } from "./Gallery";
-import { Hero } from "./Hero";
-import { Info } from "./Info";
+import { Gallery, Hero, Info } from "Layouts/Home";
 
 export default function Home() {
   return (

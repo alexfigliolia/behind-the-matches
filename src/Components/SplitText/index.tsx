@@ -1,4 +1,3 @@
-"use client";
 import { useMemo } from "react";
 import { useClassNames } from "@figliolia/classnames";
 import "./styles.scss";

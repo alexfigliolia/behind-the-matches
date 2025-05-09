@@ -1,0 +1,64 @@
+@use "Styles/Variables";
+
+.product {
+  width: 100%;
+  border-radius: 0.5em;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0em 0.2em 0.5em rgba(#000, 0.3);
+  @media(min-width: 670px) {
+    width: calc(50% - 1.25em);
+  }
+  @media(min-width: 1200px) {
+    width: calc(33.3333% - 1.6666em);
+  }
+  &>.slider {
+    width: 100%;
+    height: 250px;
+    padding: 0.5em;
+    &>div {
+      border-radius: 0.5em;
+      box-shadow: 0em 0.1em 0.2em rgba(#000, 0.2);
+      &> div {
+        border-radius: inherit;
+        overflow: hidden;
+      }
+    }
+  }
+  &>.meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    padding: 0.5em 1em 1em;
+    &>h3,
+    &>p {
+      margin: 0;
+    }
+    &>div {
+      @include Variables.center;
+      gap: 1em;
+      &>.cta-button,
+      &>.cta-link {
+        width: 100%;
+        font-size: 1em;
+        margin-top: 0.5em;
+        white-space: nowrap;
+        border: 1.5px solid #000;
+        font-weight: 500;
+        &:disabled,
+        &.disabled {
+          opacity: 0.15;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+  &.disabled {
+    & p {
+      opacity: 0.25;
+    }
+    & h3 {
+      opacity: 0.5;
+    }
+  }
+}

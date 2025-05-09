@@ -1,0 +1,16 @@
+.customize-your-own {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.75em;
+  margin-bottom: 4em;
+  &>h2 {
+    font-family: var(--font-monte-carlo);
+    font-weight: 800;
+    line-height: 1;
+    font-size: max(min(5vw, 5vw), 2.5em);
+  }
+  &>button {
+    font-size: 1.2em;
+  }
+}

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Funnel_Display, MonteCarlo } from "next/font/google";
 import { classnames } from "@figliolia/classnames";
-import { Header } from "./Header";
+import { Footer, Header } from "Layouts/Global";
+import { OptionalChildren } from "Types/React";
 import "Styles/Reset.scss";
 
 const funnelDisplay = Funnel_Display({
@@ -20,16 +21,13 @@ export const metadata: Metadata = {
   description: "Matchbook artwork designed to relive your journies",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: OptionalChildren) {
   return (
     <html lang="en">
       <body className={classnames(funnelDisplay.variable, monteCarlo.variable)}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

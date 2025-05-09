@@ -16,7 +16,7 @@ import { OptionalChildren } from "Types/React";
 import "./styles.scss";
 
 export const Slider = forwardRef(function Slider(
-  { className, children, controls, autoplay = false }: Props,
+  { className, children, controls = true, autoplay = false }: Props,
   ref: ForwardedRef<ISlider>,
 ) {
   const current = useRef(0);
@@ -129,7 +129,7 @@ export const Slider = forwardRef(function Slider(
 
 interface Props extends OptionalChildren {
   className?: string;
-  autoplay: boolean;
+  autoplay?: boolean;
   controls?: boolean;
 }
 

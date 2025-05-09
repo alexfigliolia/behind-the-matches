@@ -1,6 +1,5 @@
-"use client";
 import { BoundedContent } from "Components/BoundedContent";
-import { Button } from "Components/Button";
+import { ButtonLink } from "Components/ButtonLink";
 import { Section } from "Components/Section";
 import { Slider } from "Components/Slider";
 import { Propless } from "Types/React";
@@ -38,7 +37,7 @@ export const Info = (_: Propless) => {
             <p>
               Hand-crafted shadow boxes highlighting the places you&apos;ve been
             </p>
-            <Button text="Customize" onClick={() => {}} />
+            <ButtonLink text="Shop Artwork" href="/shop" />
           </figcaption>
         </figure>
       </BoundedContent>

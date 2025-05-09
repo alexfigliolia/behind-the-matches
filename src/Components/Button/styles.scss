@@ -1,19 +1,27 @@
 @use "Styles/Variables";
 
-.cta-button {
+.cta-button,
+.cta-link {
   display: block;
   cursor: pointer;
+  text-decoration: none;
   padding: 0.5em 1.75em;
   font-weight: 700;
   font-size: 1.5em;
   border: none;
+  color: #000;
   border-radius: 0.25em;
   transform: skewX(-5deg);
   border: 2px solid #000;
   background-color: transparent;
   position: relative;
+  text-align: center;
   overflow: hidden;
   font-family: var(--font-funnel-display);
+  &:visited {
+    color: #000;
+    text-decoration: none;
+  }
   &:hover {
     &::after {
       scale: 1 1;

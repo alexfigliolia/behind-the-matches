@@ -1,9 +1,11 @@
 .gallery {
+  margin-bottom: 3em;
   & p {
     text-align: center;
     font-family: var(--font-funnel-display);
     font-size: max(min(3.5vh, 5vw), 1.15em);
     font-weight: 300;
+    margin-bottom: 3em;
   }
   & .images {
     display: flex;

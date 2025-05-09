@@ -11,12 +11,14 @@
     "create-package": "tsx devtools/create-package/CLI.ts"
   },
   "dependencies": {
+    "@figliolia/bottom-sheet": "^1.4.1",
     "@figliolia/classnames": "^1.0.1",
     "@react-three/drei": "^10.0.7",
     "@react-three/fiber": "^9.1.2",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "stripe": "^18.1.0",
     "three": "^0.176.0"
   },
   "devDependencies": {

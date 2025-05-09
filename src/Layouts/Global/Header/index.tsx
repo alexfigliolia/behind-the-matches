@@ -1,9 +1,9 @@
 "use client";
-import { MobileMenu } from "app/MobileMenu";
 import { Fragment, useCallback, useState } from "react";
 import { useClassNames } from "@figliolia/classnames";
 import { Navigation } from "Components/Navigation";
 import { Propless } from "Types/React";
+import { MobileMenu } from "../MobileMenu";
 import { Burger } from "./Burger";
 import "./styles.scss";
 

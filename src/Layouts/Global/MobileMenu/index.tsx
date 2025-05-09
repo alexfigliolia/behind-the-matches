@@ -12,7 +12,7 @@ export const MobileMenu = ({ open, close }: Props) => {
   return (
     <Portal>
       <div role="dialog" className={classes}>
-        <Navigation />
+        <Navigation onNavigate={close} />
       </div>
     </Portal>
   );

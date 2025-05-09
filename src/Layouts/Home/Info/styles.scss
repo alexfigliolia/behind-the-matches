@@ -46,7 +46,7 @@
       &>p {
         font-size: max(min(3.5vh, 5vw), 1.15em)
       }
-      &>button {
+      &>.cta-link {
         font-size: 1.2em;
         @media (min-width: 957px) {
           align-self: flex-start;

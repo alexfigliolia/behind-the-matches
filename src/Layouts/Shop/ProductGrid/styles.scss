@@ -1,0 +1,12 @@
+@use "Styles/Variables";
+
+.product-grid {
+  width: 100%;
+  gap: 2.5em;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 3em;
+  font-family: var(--font-funnel-display);
+}
