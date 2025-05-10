@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import IStripe from "stripe";
 import { BoundedContent } from "Components/BoundedContent";
 import { PageHeading } from "Components/PageHeading";
@@ -39,7 +40,9 @@ export default async function Shop({
           <CustomizeYourOwn />
         </BoundedContent>
       </Section>
-      <ProductSheet product={selectedProduct} />
+      <Suspense>
+        <ProductSheet product={selectedProduct} />
+      </Suspense>
     </main>
   );
 }

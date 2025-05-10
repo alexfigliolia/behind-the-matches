@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import IStripe from "stripe";
 import { Stripe } from "Tools/Stripe";
 import { Propless } from "Types/React";
@@ -13,5 +14,9 @@ export const ShoppingCart = async (_: Propless) => {
   for (const product of products.data) {
     table[product.id] = product;
   }
-  return <Cart products={table} />;
+  return (
+    <Suspense>
+      <Cart products={table} />
+    </Suspense>
+  );
 };

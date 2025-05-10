@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import Stripe from "stripe";
 import { AddToCartButton } from "Components/AddToCartButton";
 import { BottomSheet } from "Components/BottomSheet";
@@ -70,7 +70,9 @@ export const ProductSheet = ({ product }: Props) => {
         />
         <div>
           <Button text="Back" onClick={close} />
-          <AddToCartButton productID={selectedProduct?.id as string} />
+          <Suspense>
+            <AddToCartButton productID={selectedProduct?.id as string} />
+          </Suspense>
         </div>
       </footer>
     </BottomSheet>

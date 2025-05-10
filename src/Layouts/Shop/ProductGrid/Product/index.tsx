@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import Stripe from "stripe";
 import { useClassNames } from "@figliolia/classnames";
 import { AddToCartButton } from "Components/AddToCartButton";
@@ -48,7 +48,9 @@ export const Product = <T extends PartialProduct>({
             disabled={disabled}
             href={`/shop?${nextPrams}`}
           />
-          <AddToCartButton productID={product.id} disabled={disabled} />
+          <Suspense>
+            <AddToCartButton productID={product.id} disabled={disabled} />
+          </Suspense>
         </div>
       </div>
     </article>

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { BoundedContent } from "Components/BoundedContent";
 import { ButtonLink } from "Components/ButtonLink";
 import { PageHeading } from "Components/PageHeading";
@@ -116,7 +117,9 @@ export default function WorkShops(_: Propless) {
           </p>
         </Section>
       </BoundedContent>
-      <BookAWorkShop />
+      <Suspense>
+        <BookAWorkShop />
+      </Suspense>
     </main>
   );
 }
