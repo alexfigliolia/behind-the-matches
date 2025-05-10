@@ -2,16 +2,27 @@
 import { Fragment, useCallback, useState } from "react";
 import { useClassNames } from "@figliolia/classnames";
 import { Navigation } from "Components/Navigation";
-import { Propless } from "Types/React";
+import { useModalToggle } from "Hooks/useModalToggle";
+import { OptionalChildren } from "Types/React";
 import { MobileMenu } from "../MobileMenu";
 import { Burger } from "./Burger";
 import "./styles.scss";
 
-export const Header = (_: Propless) => {
+export const Header = ({ children }: OptionalChildren) => {
   const [open, setOpen] = useState(false);
-  const toggle = useCallback(() => {
-    setOpen(v => !v);
-  }, []);
+
+  const openMenu = useCallback(() => setOpen(true), []);
+  const closeMenu = useCallback(() => setOpen(false), []);
+
+  const toggle = useModalToggle(openMenu, closeMenu);
+
+  const toggleMenu = useCallback(() => {
+    if (toggle.isOpen) {
+      return toggle.close();
+    }
+    toggle.open();
+  }, [toggle]);
+
   const classes = useClassNames("main-header", { open });
   return (
     <Fragment>
@@ -20,11 +31,12 @@ export const Header = (_: Propless) => {
           <div>
             <h1>BTM</h1>
             <Navigation />
-            <Burger open={open} onClick={toggle} />
+            <Burger open={open} onClick={toggleMenu} />
+            {children}
           </div>
         </div>
       </header>
-      <MobileMenu open={open} close={toggle} />
+      <MobileMenu open={open} close={closeMenu} />
     </Fragment>
   );
 };

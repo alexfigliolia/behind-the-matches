@@ -16,7 +16,7 @@ export const Button = ({ text, onClick, className, ...rest }: Props) => {
 
 interface Props {
   text: string;
-  onClick: Callback;
+  onClick?: Callback;
   className?: string;
   disabled?: boolean;
 }

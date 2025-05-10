@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Funnel_Display, MonteCarlo } from "next/font/google";
 import { classnames } from "@figliolia/classnames";
-import { Footer, Header } from "Layouts/Global";
+import { Footer, Header, ShoppingCart } from "Layouts/Global";
 import { OptionalChildren } from "Types/React";
 import "Styles/Reset.scss";
 
@@ -25,7 +25,9 @@ export default function RootLayout({ children }: OptionalChildren) {
   return (
     <html lang="en">
       <body className={classnames(funnelDisplay.variable, monteCarlo.variable)}>
-        <Header />
+        <Header>
+          <ShoppingCart />
+        </Header>
         {children}
         <Footer />
       </body>

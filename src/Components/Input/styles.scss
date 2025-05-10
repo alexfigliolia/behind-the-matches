@@ -1,0 +1,63 @@
+.input {
+  --border-color: #000;
+  --background-color: #fff;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  &:has(>input:focus),
+  &:has(>input:focus-visible),
+  &:has(>input:valid),
+  &:focus-within {
+    &>span {
+      translate: -5px -135%;
+      scale: 0.85;
+    }
+  }
+  &:has(>input:focus),
+  &:has(>input:focus-visible),
+  &:focus-within {
+    &>input,
+    &>textarea {
+      border: 1px solid #319ff4;
+      box-shadow: 0em 0em 0.4em #319ff4;
+    }
+  }
+  &>span {
+    display: block;
+    z-index: 2;
+    position: absolute;
+    top: 20px;
+    left: 0.5em;
+    translate: 0 -50%;
+    color: var(--border-color);
+    background: var(--background-color);
+    border-radius: 2em;
+    padding: 0.1em 0.25em;
+    transition: translate 0.4s, scale 0.4s;
+    cursor: text;
+  }
+  &>input,
+  &>textarea {
+    width: 100%;
+    color: var(--border-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.25em;
+    background: var(--background-color);
+    outline: none;
+    transition: all 0.4s;
+    &::placeholder {
+      opacity: 0;
+    }
+  }
+  &>input {
+    height: 40px;
+    padding: 0 0.5em 0 1em;
+  }
+  &>textarea {
+    height: 150px;
+    resize: none;
+    padding: 1em;
+  }
+}

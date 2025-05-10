@@ -16,7 +16,7 @@
     width: 100%;
     height: 250px;
     padding: 0.5em;
-    &>div {
+    &>.scroll-view {
       border-radius: 0.5em;
       box-shadow: 0em 0.1em 0.2em rgba(#000, 0.2);
       &> div {

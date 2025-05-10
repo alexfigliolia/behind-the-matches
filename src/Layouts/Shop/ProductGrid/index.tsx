@@ -3,6 +3,12 @@ import Stripe from "stripe";
 import { Product } from "./Product";
 import "./styles.scss";
 
+const EMPTY_PRODUCT = {
+  name: "Coming Soon",
+  images: ["/coming-soon.jpg"],
+  default_price: { unit_amount: 0 },
+} as const;
+
 export const ProductGrid = ({ products, min = 3 }: Props) => {
   const fill = useMemo(
     () => new Array(Math.max(min - products.length, 0)).fill(null),
@@ -15,17 +21,15 @@ export const ProductGrid = ({ products, min = 3 }: Props) => {
         if (!price.unit_amount) {
           return null;
         }
-        return <Product key={product.id} {...product} />;
+        return <Product key={product.id} product={product} />;
       })}
       {fill.map((_, i) => {
         return (
           <Product
             key={i}
             disabled
-            name="Coming Soon"
-            images={["/coming-soon.jpg"]}
             // @ts-ignore
-            default_price={{ unit_amount: 0 }}
+            product={EMPTY_PRODUCT}
           />
         );
       })}

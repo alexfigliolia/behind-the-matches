@@ -1,12 +1,14 @@
 @use "Styles/Variables";
 
 .bottom-sheet.product-sheet {
-  z-index: 200;
   --notch-color: #fff;
-  & .sheet-scroll-view {
+  &> .sheet > .sheet-scroll-view {
     padding: 0;
     position: relative;
     overscroll-behavior: contain;
+    @media (min-width: 670px) {
+      padding: 0;
+    }
   }
   & .slider {
     width: 100%;
@@ -39,7 +41,7 @@
     gap: 1em;
     & h2 {
       line-height: 1;
-      font-family: var(--font-monte-carlo);
+      font-family: var(--font-funnel-display);
       font-size: max(min(5vh, 7vw), 1.5em);
       margin: 0;
     }
@@ -50,6 +52,7 @@
     &>div {
       @include Variables.center;
       gap: 1em;
+      margin-top: 0.5em;
       &>button {
         font-size: 1.1em;
       }

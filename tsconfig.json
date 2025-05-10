@@ -62,6 +62,7 @@
     ".prettierrc.mjs"
   ],
   "exclude": [
+    ".next",
     "node_modules"
   ]
 }

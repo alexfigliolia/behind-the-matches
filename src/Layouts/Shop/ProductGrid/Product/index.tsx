@@ -1,24 +1,33 @@
 "use client";
+import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import Stripe from "stripe";
 import { useClassNames } from "@figliolia/classnames";
-import { Button } from "Components/Button";
+import { AddToCartButton } from "Components/AddToCartButton";
 import { ButtonLink } from "Components/ButtonLink";
 import { ProductPrice } from "Components/ProductPrice";
 import { Slider } from "Components/Slider";
 import "./styles.scss";
 
-export const Product = <T extends Props>({
-  id,
-  images,
-  name,
+export const Product = <T extends PartialProduct>({
+  product,
   disabled = false,
-  default_price,
-}: T) => {
+}: Props<T>) => {
+  const searchParams = useSearchParams();
+  const { id, name, images, default_price } = product;
   const classes = useClassNames("product", { disabled });
   const price = default_price as Stripe.Price;
+
+  const nextPrams = useMemo(() => {
+    const nextParms = new URLSearchParams(searchParams);
+    nextParms.set("product", id);
+    return nextParms.toString();
+  }, [searchParams, id]);
+
   if (price.unit_amount === null) {
     return null;
   }
+
   return (
     <article className={classes}>
       <Slider controls={images.length > 1}>
@@ -34,19 +43,24 @@ export const Product = <T extends Props>({
         <div>
           <ButtonLink
             shallow
-            scroll={false}
-            href={`/shop?product=${id}`}
-            disabled={disabled}
             text="More"
+            scroll={false}
+            disabled={disabled}
+            href={`/shop?${nextPrams}`}
           />
-          <Button disabled={disabled} text="Buy Now" onClick={() => {}} />
+          <AddToCartButton productID={product.id} disabled={disabled} />
         </div>
       </div>
     </article>
   );
 };
 
-interface Props
-  extends Pick<Stripe.Product, "images" | "name" | "default_price" | "id"> {
+interface Props<T extends PartialProduct> {
   disabled?: boolean;
+  product: T;
 }
+
+type PartialProduct = Pick<
+  Stripe.Product,
+  "images" | "name" | "default_price" | "id"
+>;
