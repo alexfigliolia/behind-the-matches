@@ -7,6 +7,7 @@ import { useModalToggle } from "Hooks/useModalToggle";
 import { OptionalChildren } from "Types/React";
 import { MobileMenu } from "../MobileMenu";
 import { Burger } from "./Burger";
+import { Socials } from "./Socials";
 import "./styles.scss";
 
 export const Header = ({ children }: OptionalChildren) => {
@@ -32,7 +33,9 @@ export const Header = ({ children }: OptionalChildren) => {
           <div>
             <Link href="/">BTM</Link>
             <div>
-              <Navigation />
+              <Navigation>
+                <Socials />
+              </Navigation>
               <Burger open={open} onClick={toggleMenu} />
               {children}
             </div>

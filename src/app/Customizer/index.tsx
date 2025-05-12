@@ -52,7 +52,10 @@ export const Customizer = (_: Propless) => {
       </Slider>
       <div className="form">
         <h2>Customize</h2>
-        <p>To request a custom piece, please fill out the form below.</p>
+        <p>
+          Custom pieces are our <strong>bread and butter</strong>. Let your mind
+          run wild!
+        </p>
         <form>
           <Input required type="text" name="name" label="Your Name" />
           <Input required type="email" name="email" label="Your Email" />

@@ -1,9 +1,10 @@
 import { Link } from "Components/Link";
 import { SplitText } from "Components/SplitText";
 import { Callback } from "Types/Generics";
+import { OptionalChildren } from "Types/React";
 import "./styles.scss";
 
-export const Navigation = ({ onNavigate }: Props) => {
+export const Navigation = ({ onNavigate, children }: Props) => {
   return (
     <nav className="nav">
       <ul>
@@ -27,11 +28,12 @@ export const Navigation = ({ onNavigate }: Props) => {
             <SplitText text="Contact" />
           </Link>
         </li>
+        {children && <li>{children}</li>}
       </ul>
     </nav>
   );
 };
 
-interface Props {
+interface Props extends OptionalChildren {
   onNavigate?: Callback;
 }

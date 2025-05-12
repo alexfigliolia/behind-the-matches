@@ -17,7 +17,8 @@
   overscroll-behavior: contain;
   box-shadow: -0.2em 0em 0.4em rgba(#000, 0.2);
   font-family: var(--font-funnel-display);
-  transition: scale 0.75s 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+  visibility: hidden;
+  transition: scale 0.75s 0.35s cubic-bezier(0.76, 0, 0.24, 1), visibility 0s 1.1s;
   &>.content {
     width: 95%;
     margin: auto;
@@ -44,7 +45,7 @@
         transition: opacity 1s 0s;
         outline: none;
         &:hover,
-        &:focus {
+        &:focus-visible {
           &>svg {
             stroke: var(--action-color);
             filter: drop-shadow(0em 0em 0.2em rgba(from var(--action-color) r g b / 90%));
@@ -116,7 +117,8 @@
   }
   &.open {
     scale: 1 1;
-    transition: scale 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+    visibility: visible;
+    transition: scale 0.75s cubic-bezier(0.76, 0, 0.24, 1), visibility 0s 0s;
     &>.content {
       &>ul,
       &>.none {

@@ -5,7 +5,7 @@
   list-style-type: none;
   display: flex;
   flex-direction: row;
-  & a {
+  &>li > a {
     display: block;
     font-size: 1.1em;
     font-weight: 500;

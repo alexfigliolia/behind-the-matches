@@ -21,7 +21,7 @@
     padding: 0;
     border: none;
     outline: none;
-    &:focus > svg,
+    &:focus-visible > svg,
     &:hover > svg {
       stroke: var(--action-color);
       filter: drop-shadow(0em 0.1em 0.2em rgba(from var(--action-color) r g b / 70%));

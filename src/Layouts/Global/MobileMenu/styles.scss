@@ -2,70 +2,108 @@
 
 .mobile-menu {
   width: 100%;
-  height: 100vh;
+  --height: 100vh;
+  height: var(--height);
+  max-height: var(--height);
+  overflow-y: scroll;
   position: fixed;
   top: 0;
   left: 0;
   background: linear-gradient(to bottom, #242424d1, #1c1a1aef);
   backdrop-filter: blur(5px);
   z-index: 99;
-  @include Variables.center;
+  flex-direction: column;
   scale: 0 1;
-  transition: scale 0.75s 0.25s cubic-bezier(0.76, 0, 0.24, 1);
+  visibility: hidden;
+  transition: scale 0.75s 0.25s cubic-bezier(0.76, 0, 0.24, 1), height 0.4s, visibility 0s 1s;
   transform-origin: 100% 50%;
   @media (min-width: 750px) {
     display: none;
   }
-  &>.nav > ul {
-    --color: #fff;
-    list-style-type: none;
+  &>div {
+    margin-top: var(--header-height);
+    min-height: calc(var(--height) - var(--header-height));
     @include Variables.center;
-    gap: 2em;
     flex-direction: column;
-    margin-top: -20%;
-    @media (min-width: 670px) {
-      margin-top: 5%;
-    }
-    &>li {
-      text-align: center;
-      &>a {
-        font-size: min(8vh, 10vw, 80px);
-        &::after {
-          opacity: 0;
-          transition: scale 0.4s, opacity 0.3s 0s;
-        }
-        &>.split-text {
-          overflow: hidden;
-          &> div {
-            translate: 0 100%;
-            @for $i from 1 through 13 {
-              &:nth-of-type(#{$i}) {
-                transition: translate 0.5s #{$i * 0.025}s cubic-bezier(0.65, 0, 0.35, 1);
+    gap: 2em;
+    &>.nav > ul {
+      --color: #fff;
+      list-style-type: none;
+      @include Variables.center;
+      gap: 2em;
+      flex-direction: column;
+      &>li {
+        text-align: center;
+        &>a {
+          font-size: min(8vh, 10vw, 80px);
+          &::after {
+            opacity: 0;
+            transition: scale 0.4s, opacity 0.3s 0s;
+          }
+          &>.split-text {
+            overflow: hidden;
+            &> div {
+              translate: 0 100%;
+              @for $i from 1 through 13 {
+                &:nth-of-type(#{$i}) {
+                  transition: translate 0.5s #{$i * 0.025}s cubic-bezier(0.65, 0, 0.35, 1);
+                }
               }
             }
           }
         }
       }
     }
+    &>.socials {
+      width: 80%;
+      border-top: 1px solid rgba(#fff, 0.25);
+      @include Variables.center;
+      gap: 1em;
+      padding-top: 2em;
+      margin-top: calc(var(--header-height) / 2);
+      scale: 0 1;
+      transition: scale 0.4s 0.25s;
+      overflow: hidden;
+      &>a {
+        display: block;
+        width: 3em;
+        height: 3em;
+        translate: 0 100%;
+        opacity: 0;
+        transition: all 0.4s 0s;
+      }
+    }
   }
   &.open {
     scale: 1 1;
-    transition: scale 0.75s 0s cubic-bezier(0.76, 0, 0.24, 1);
-    &>.nav > ul {
-      &>li {
-        &>a {
-          &::after {
-            opacity: 1;
-            transition: scale 0.4s, opacity 0.3s 0.6s;
-          }
-          &> .split-text > div {
-            translate: 0 0%;
-            @for $i from 1 through 13 {
-              &:nth-of-type(#{$i}) {
-                transition: translate 1s #{($i * 0.025) + 0.1}s cubic-bezier(0.65, 0, 0.35, 1);
+    visibility: visible;
+    transition: scale 0.75s 0s cubic-bezier(0.76, 0, 0.24, 1), height 0.4s, visibility 0s 0s;
+    &>div {
+      &>.nav > ul {
+        &>li {
+          &>a {
+            &::after {
+              opacity: 1;
+              transition: scale 0.4s, opacity 0.3s 0.6s;
+            }
+            &> .split-text > div {
+              translate: 0 0%;
+              @for $i from 1 through 13 {
+                &:nth-of-type(#{$i}) {
+                  transition: translate 1s #{($i * 0.025) + 0.1}s cubic-bezier(0.65, 0, 0.35, 1);
+                }
               }
             }
           }
+        }
+      }
+      &>.socials {
+        scale: 1 1;
+        transition: scale 0.4s 1s;
+        &>a {
+          translate: 0 0%;
+          opacity: 1;
+          transition: all 0.4s 1.4s;
         }
       }
     }
