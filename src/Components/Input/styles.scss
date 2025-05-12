@@ -1,3 +1,5 @@
+@use "Styles/Variables";
+
 .input {
   --border-color: #000;
   --background-color: #fff;
@@ -9,6 +11,8 @@
   &:has(>input:focus),
   &:has(>input:focus-visible),
   &:has(>input:valid),
+  &.valid,
+  &.filled,
   &:focus-within {
     &>span {
       translate: -5px -135%;
@@ -54,6 +58,15 @@
   &>input {
     height: 40px;
     padding: 0 0.5em 0 1em;
+    &[type='date'] {
+      min-width: calc(100% - 1em);
+      box-sizing: border-box;
+      appearance: textfield;
+      &::-webkit-date-and-time-value {
+        text-align: left;
+        padding-left: 0.5em;
+      }
+    }
   }
   &>textarea {
     height: 150px;

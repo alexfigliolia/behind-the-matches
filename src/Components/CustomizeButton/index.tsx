@@ -11,7 +11,15 @@ export const CustomizeButton = ({ text = "Customize Your Own" }: Props) => {
     const paramString = copy.toString();
     return paramString.length ? `?${paramString}` : "";
   }, [params]);
-  return <ButtonLink text={text} href={searchParams} />;
+  return (
+    <ButtonLink
+      replace
+      shallow
+      text={text}
+      href={searchParams}
+      scroll={false}
+    />
+  );
 };
 
 interface Props {

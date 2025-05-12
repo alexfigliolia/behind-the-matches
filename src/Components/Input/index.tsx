@@ -1,30 +1,22 @@
 "use client";
-import { HTMLProps, useCallback, useState } from "react";
-import { classnames } from "@figliolia/classnames";
+import { HTMLProps } from "react";
+import { useClassNames } from "@figliolia/classnames";
+import { useInputState } from "Hooks/useInputState";
 import "./styles.scss";
 
 export const Input = ({
   label,
-  type,
   className,
+  onChange: onExternalChange,
   ...rest
 }: Omit<HTMLProps<HTMLInputElement>, "placeholder">) => {
-  const [focused, setFocused] = useState(false);
-  const onFocus = useCallback(() => {
-    setFocused(true);
-  }, []);
-  const onBlur = useCallback(() => {
-    setFocused(false);
-  }, []);
+  const { node, onChange, valid, filled } = useInputState(onExternalChange);
+  const classes = useClassNames("input", className, { valid, filled });
+
   return (
-    <label className={classnames("input", className)}>
+    <label className={classes}>
       <span>{label}</span>
-      <input
-        onFocus={onFocus}
-        onBlur={onBlur}
-        type={type === "date" && !focused ? "text" : type}
-        {...rest}
-      />
+      <input ref={node} {...rest} onChange={onChange} />
     </label>
   );
 };

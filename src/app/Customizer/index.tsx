@@ -37,9 +37,10 @@ export const Customizer = (_: Propless) => {
   const toggle = useModalToggle(openSheet, close);
 
   useEffect(() => {
-    if (!!params.get("customizer")) {
+    const open = !!params.get("customizer");
+    if (open && !toggle.isOpen) {
       toggle.open();
-    } else if (toggle.isOpen) {
+    } else if (!open && toggle.isOpen) {
       toggle.close();
     }
   }, [params, toggle]);
