@@ -37,7 +37,9 @@ export default async function Shop({
             <p>The shop will update periodically with new products</p>
           </header>
           <ProductGrid products={products.data} />
-          <CustomizeYourOwn />
+          <Suspense>
+            <CustomizeYourOwn />
+          </Suspense>
         </BoundedContent>
       </Section>
       <Suspense>

@@ -6,6 +6,7 @@ import { Button } from "Components/Button";
 import { Input } from "Components/Input";
 import { TextArea } from "Components/TextArea";
 import { useModalToggle } from "Hooks/useModalToggle";
+import { useMutateParams } from "Hooks/useMutateParams";
 import { Close } from "Icons/Close";
 import { Propless } from "Types/React";
 import "./styles.scss";
@@ -15,6 +16,7 @@ export const BookAWorkShop = (_: Propless) => {
 
   const nav = useRouter();
   const params = useSearchParams();
+  const mutator = useMutateParams();
 
   const openSheet = useCallback(() => {
     setOpen(true);
@@ -23,16 +25,17 @@ export const BookAWorkShop = (_: Propless) => {
   const close = useCallback(() => {
     setOpen(false);
     setTimeout(() => {
-      nav.push("/workshops", { scroll: false });
+      const params = mutator(p => p.delete("book"));
+      nav.replace(`/workshops${params}`, { scroll: false });
     }, 400);
-  }, [nav]);
+  }, [nav, mutator]);
 
   const toggle = useModalToggle(openSheet, close);
 
   useEffect(() => {
     if (params.get("book")) {
       toggle.open();
-    } else {
+    } else if (toggle.isOpen) {
       toggle.close();
     }
   }, [params, toggle]);

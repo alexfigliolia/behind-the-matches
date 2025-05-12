@@ -1,0 +1,69 @@
+@use "Styles/Variables";
+
+.cart-button {
+  width: 0em;
+  --size: 2.15em;
+  --margin-left: 1.5em;
+  height: var(--size);
+  position: relative;
+  background-color: transparent;
+  border: none;
+  padding: 0em;
+  margin-left: 0em;
+  font-family: var(--font-funnel-display);
+  border-radius: 50%;
+  animation: showCartButton 1s forwards;
+  &:focus {
+    outline-offset: 0.65em;
+    outline-color: rgba(from var(--action-color) r g b / 50%);
+  }
+  &>svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--action-color);
+    position: relative;
+    top: -0.15em;
+    opacity: 0;
+    transition: fill 0.3s, filter 0.3s;
+    animation: showContent 1s 0.5s forwards;
+    filter: drop-shadow(0em 0em 0.2em rgba(from var(--action-color) r g b / 90%));
+  } 
+  &>div {
+    top: calc(var(--size) / 16);
+    left: 0;
+    color: #000;
+    width: 100%;
+    height: 100%;
+    font-size: calc(var(--size) * 0.45);
+    pointer-events: none;
+    @include Variables.center;
+    position: absolute;
+    font-weight: 700;
+    color: var(--action-color);
+    opacity: 0;
+    animation: showContent 1s 0.5s forwards;
+    transition: color 0.3s;
+  }
+}
+
+@keyframes showCartButton {
+  from {
+    width: 0em;
+    height: var(--size);
+    margin-left: 0em;
+  }
+  to {
+    height: var(--size);
+    width: var(--size);
+    margin-left: var(--margin-left);
+  }
+}
+
+@keyframes showContent {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -3,6 +3,7 @@ import IStripe from "stripe";
 import { Stripe } from "Tools/Stripe";
 import { Propless } from "Types/React";
 import { Cart } from "./Cart";
+import { CartButton } from "./CartButton";
 
 export const ShoppingCart = async (_: Propless) => {
   const products = await Stripe.getClient().products.list({
@@ -16,6 +17,7 @@ export const ShoppingCart = async (_: Propless) => {
   }
   return (
     <Suspense>
+      <CartButton />
       <Cart products={table} />
     </Suspense>
   );

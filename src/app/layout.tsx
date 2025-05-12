@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Funnel_Display, MonteCarlo } from "next/font/google";
+import { Suspense } from "react";
 import { classnames } from "@figliolia/classnames";
 import { Footer, Header, ShoppingCart } from "Layouts/Global";
 import { OptionalChildren } from "Types/React";
+import { Customizer } from "./Customizer";
 import "Styles/Reset.scss";
 
 const funnelDisplay = Funnel_Display({
@@ -30,6 +32,9 @@ export default function RootLayout({ children }: OptionalChildren) {
         </Header>
         {children}
         <Footer />
+        <Suspense>
+          <Customizer />
+        </Suspense>
       </body>
     </html>
   );

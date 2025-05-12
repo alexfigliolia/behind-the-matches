@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Fragment, useCallback, useState } from "react";
 import { useClassNames } from "@figliolia/classnames";
 import { Navigation } from "Components/Navigation";
@@ -29,10 +30,12 @@ export const Header = ({ children }: OptionalChildren) => {
       <header className={classes}>
         <div>
           <div>
-            <h1>BTM</h1>
-            <Navigation />
-            <Burger open={open} onClick={toggleMenu} />
-            {children}
+            <Link href="/">BTM</Link>
+            <div>
+              <Navigation />
+              <Burger open={open} onClick={toggleMenu} />
+              {children}
+            </div>
           </div>
         </div>
       </header>

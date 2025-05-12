@@ -1,7 +1,8 @@
 "use client";
+import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { BoundedContent } from "Components/BoundedContent";
-import { ButtonLink } from "Components/ButtonLink";
+import { CustomizeButton } from "Components/CustomizeButton";
 import { PageHeading } from "Components/PageHeading";
 import { Section } from "Components/Section";
 import { Propless } from "Types/React";
@@ -19,7 +20,9 @@ export const Hero = (_: Propless) => {
       <div className="content">
         <BoundedContent>
           <PageHeading>Behind the matches</PageHeading>
-          <ButtonLink text="Customize" href="/customize" />
+          <Suspense>
+            <CustomizeButton text="Customize" />
+          </Suspense>
         </BoundedContent>
       </div>
     </Section>

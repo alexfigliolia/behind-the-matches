@@ -1,5 +1,5 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import Stripe from "stripe";
 import { AddToCartButton } from "Components/AddToCartButton";
@@ -8,12 +8,13 @@ import { Button } from "Components/Button";
 import { ProductPrice } from "Components/ProductPrice";
 import { Slider } from "Components/Slider";
 import { useModalToggle } from "Hooks/useModalToggle";
+import { useMutateParams } from "Hooks/useMutateParams";
 import "./styles.scss";
 
 export const ProductSheet = ({ product }: Props) => {
   const nav = useRouter();
-  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
+  const paramsMutator = useMutateParams();
   const [selectedProduct, setSelectedProduct] = useState(product);
 
   const openSheet = useCallback(() => {
@@ -23,21 +24,19 @@ export const ProductSheet = ({ product }: Props) => {
   const close = useCallback(() => {
     setOpen(false);
     setTimeout(() => {
-      const nextParams = new URLSearchParams(searchParams);
-      nextParams.delete("product");
-      const paramsString = nextParams.toString();
-      nav.push(`/shop${paramsString.length ? `?${paramsString}` : ""}`, {
+      const params = paramsMutator(p => p.delete("product"));
+      nav.replace(`/shop${params}`, {
         scroll: false,
       });
     }, 400);
-  }, [nav, searchParams]);
+  }, [nav, paramsMutator]);
 
   const toggle = useModalToggle(openSheet, close);
 
   useEffect(() => {
     if (product && !toggle.isOpen) {
       toggle.open();
-    } else if (!product) {
+    } else if (!product && toggle.isOpen) {
       toggle.close();
     }
   }, [product, toggle]);

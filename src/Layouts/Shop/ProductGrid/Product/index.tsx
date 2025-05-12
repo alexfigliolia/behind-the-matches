@@ -43,6 +43,7 @@ export const Product = <T extends PartialProduct>({
         <div>
           <ButtonLink
             shallow
+            replace
             text="More"
             scroll={false}
             disabled={disabled}

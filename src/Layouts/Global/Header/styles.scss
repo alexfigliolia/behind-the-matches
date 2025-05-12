@@ -32,19 +32,30 @@
           font-size: 2.25em;
         }
       }
-      &>.burger {
-        --color: #000;
-        @media (min-width: 670px) {
-          font-size: 1.25em;
+      &>div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        &>.burger {
+          --color: #000;
+          @media (min-width: 670px) {
+            font-size: 1.25em;
+          }
+          @media (min-width: 750px) {
+            display: none;
+          }
         }
-        @media (min-width: 750px) {
+        &>.nav {
           display: none;
+          @media (min-width: 750px) {
+            display: block;
+          }
         }
-      }
-      &>.nav {
-        display: none;
-        @media (min-width: 750px) {
-          display: block;
+        &>.cart-button {
+          @media (min-width: 670px) {
+            --size: 2.5em;
+            --margin-left: 2.25em;
+          }
         }
       }
     }

@@ -1,7 +1,7 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { Button } from "Components/Button";
+import { useOpenCart } from "Hooks/useOpenCart";
 import { ShoppingCart } from "Tools/ShoppingCart";
 
 export const AddToCartButton = ({
@@ -9,18 +9,14 @@ export const AddToCartButton = ({
   disabled,
   text = "Add to Cart",
 }: Props) => {
-  const nav = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const openCart = useOpenCart();
   const addToCart = useCallback(() => {
     if (!productID) {
       return;
     }
     ShoppingCart.incrementItem(productID);
-    const nextParams = new URLSearchParams(searchParams);
-    nextParams.set("cart", "1");
-    nav.push(`${pathname}?${nextParams.toString()}`, { scroll: false });
-  }, [productID, nav, pathname, searchParams]);
+    openCart();
+  }, [productID, openCart]);
 
   return <Button text={text} disabled={disabled} onClick={addToCart} />;
 };

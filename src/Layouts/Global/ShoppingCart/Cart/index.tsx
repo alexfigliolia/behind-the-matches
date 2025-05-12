@@ -7,8 +7,10 @@ import { Button } from "Components/Button";
 import { Portal } from "Components/Portal";
 import { SplitText } from "Components/SplitText";
 import { useModalToggle } from "Hooks/useModalToggle";
+import { useMutateParams } from "Hooks/useMutateParams";
 import { useShoppingCart } from "Hooks/useShoppingCart";
 import { useWindowSize } from "Hooks/useWindowSize";
+import { Close } from "Icons/Close";
 import { Currency } from "Tools/Currency";
 import { CartItem } from "./CartItem";
 import "./styles.scss";
@@ -20,6 +22,7 @@ export const Cart = ({ products }: Props) => {
   const [open, setOpen] = useState(false);
   const params = useSearchParams();
   const pathName = usePathname();
+  const paramsMutator = useMutateParams();
 
   const openCart = useCallback(() => {
     setOpen(true);
@@ -28,14 +31,12 @@ export const Cart = ({ products }: Props) => {
   const closeCart = useCallback(() => {
     setOpen(false);
     setTimeout(() => {
-      const nextParams = new URLSearchParams(params);
-      nextParams.delete("cart");
-      const paramsString = nextParams.toString();
-      nav.push(`${pathName}${paramsString.length ? `?${paramsString}` : ""}`, {
+      const nextParams = paramsMutator(p => p.delete("cart"));
+      nav.replace(`${pathName}${nextParams}`, {
         scroll: false,
       });
     }, 400);
-  }, [nav, pathName, params]);
+  }, [nav, paramsMutator, pathName]);
 
   const toggle = useModalToggle(openCart, closeCart);
 
@@ -43,7 +44,7 @@ export const Cart = ({ products }: Props) => {
     const open = !!params.get("cart");
     if (open && !toggle.isOpen) {
       toggle.open();
-    } else if (!open) {
+    } else if (!open && toggle.isOpen) {
       toggle.close();
     }
   }, [params, toggle]);
@@ -62,22 +63,20 @@ export const Cart = ({ products }: Props) => {
 
   const classes = useClassNames("cart", { open });
 
-  // const node = useClickOutside<HTMLDivElement, false>({
-  //   open,
-  //   refCallback: false,
-  //   callback: toggle.close,
-  // });
-
   return (
     <Portal>
       <div
-        // ref={node}
         role="dialog"
         aria-hidden={!open}
         className={classes}
         style={{ minHeight: height }}>
         <div className="content">
-          <SplitText Tag="h2" text="Your Cart" />
+          <div className="title">
+            <button onClick={toggle.close} className="closer">
+              <Close />
+            </button>
+            <SplitText Tag="h2" text="Your Cart" />
+          </div>
           {!!itemKeys.length ? (
             <ul>
               {itemKeys.map(id => {
