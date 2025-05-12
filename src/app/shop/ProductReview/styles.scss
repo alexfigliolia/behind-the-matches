@@ -1,0 +1,39 @@
+@use "Styles/Variables";
+
+.product-review {
+  width: 100%;
+  @include Variables.center;
+  font-family: var(--font-funnel-display);
+  gap: 1em;
+  @media (min-width: 670px) {
+    gap: 2em;
+  }
+  &.reverse {
+    flex-direction: row-reverse;
+    @media (min-width: 957px) {
+      flex-direction: row;
+    }
+  }
+  &>div {
+    width: 40%;
+    height: 100%;
+    max-height: 400px;
+    padding: 0.25em;
+    border-radius: 0.5em;
+    background-color: #fff;
+    box-shadow: 0em 0.1em 0.2em rgba(#000, 0.2);
+    &>img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.25em;
+      overflow: hidden;
+    }
+  }
+  &>figcaption {
+    max-width: 60%;
+    line-height: 1.5;
+    color: var(--paragraph-color);
+    font-size: max(min(3vw, 4vh, 1.15em), 1em);
+  }
+}

@@ -6,6 +6,7 @@ import { Section } from "Components/Section";
 import { CustomizeYourOwn, ProductGrid } from "Layouts/Shop";
 import { Stripe } from "Tools/Stripe";
 import { PageProps, Propless } from "Types/React";
+import { ProductReview } from "./ProductReview";
 import { ProductSheet } from "./ProductSheet";
 import "./styles.scss";
 
@@ -41,6 +42,17 @@ export default async function Shop({
             <CustomizeYourOwn />
           </Suspense>
         </BoundedContent>
+        <div className="reviews">
+          <ProductReview
+            image="/customer-piece-1.jpg"
+            review="“The piece looks amazing — it went up on the wall today and couldn’t be more perfect in the space. Thanks again for your patience and attention to detail, I’m so happy with how it turned out. I’ll definitely be in touch about additional pieces in the future!”"
+          />
+          <ProductReview
+            reverse
+            image="/customer-piece-2.png"
+            review="“She loved it. Huge success!!!!”"
+          />
+        </div>
       </Section>
       <Suspense>
         <ProductSheet product={selectedProduct} />

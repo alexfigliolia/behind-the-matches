@@ -23,5 +23,22 @@
       font-family: var(--font-funnel-display);
     }
   }
+  & .reviews {
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    margin-top: 6em;
+    margin-bottom: 4em;
+    @media (min-width: 957px) {
+      flex-direction: row;
+      justify-content: space-between;
+      & figcaption {
+        max-width: 300px;
+      }
+    }
+  }
 }
 

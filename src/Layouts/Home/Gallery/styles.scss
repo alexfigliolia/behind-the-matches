@@ -46,4 +46,12 @@
       }
     }
   }
+  & a {
+    width: max-content;
+    margin: 3em auto 0;
+    font-size: 1.25em;
+    @media(min-width: 670px) {
+      font-size: 1.5em;
+    }
+  }
 }

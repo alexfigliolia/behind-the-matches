@@ -1,4 +1,5 @@
 import { BoundedContent } from "Components/BoundedContent";
+import { CustomizeButton } from "Components/CustomizeButton";
 import { GalleryImages } from "Components/GalleryImages";
 import { Section } from "Components/Section";
 import { Propless } from "Types/React";
@@ -15,6 +16,7 @@ export const Gallery = (_: Propless) => {
         <div className="images">
           <GalleryImages />
         </div>
+        <CustomizeButton />
       </BoundedContent>
     </Section>
   );
