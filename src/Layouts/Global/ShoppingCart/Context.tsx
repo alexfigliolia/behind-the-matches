@@ -23,14 +23,14 @@ import { Callback } from "Types/Generics";
 import { OptionalChildren } from "Types/React";
 
 const EMPTY_ADDRESS = {
-  name: "Alex Figliolia",
+  name: "",
   address: {
-    line1: "600 El Camino Real",
-    line2: "Unit 202",
-    city: "Belmont",
-    state: "California",
-    postal_code: "94002",
-    country: "US",
+    line1: "",
+    line2: "",
+    city: "",
+    state: "",
+    postal_code: "",
+    country: "",
   },
   phone: "",
 } satisfies ShippingAddress;
@@ -65,8 +65,8 @@ export const CheckoutProvider = Suspended(({ children, products }: Props) => {
   const [open, setOpen] = useState(false);
   const productsInCart = useShoppingCart();
   const replace = useReplaceSearchParams();
-  const [email, setEmail] = useState("alexfigliolia@gmail.com");
-  const [orderId, setOrderId] = useState("asdfas_asd213123123123");
+  const [email, setEmail] = useState("");
+  const [orderId, setOrderId] = useState("");
   const [confirmation, setConfirmation] = useState(true);
   const [shippingAddress, setShippingAddress] =
     useState<ShippingAddress>(EMPTY_ADDRESS);
