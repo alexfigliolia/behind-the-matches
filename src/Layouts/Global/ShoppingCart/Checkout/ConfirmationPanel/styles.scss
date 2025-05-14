@@ -1,5 +1,6 @@
 .panel.confirm {
   padding-bottom: var(--layout-padding);
+  position: relative;
   & .closer {
     top: 0;
     right: 1em;
