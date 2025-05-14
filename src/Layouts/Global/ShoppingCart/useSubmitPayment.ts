@@ -4,8 +4,7 @@ import { CheckoutContext } from "./Context";
 
 export const useSubmitPayment = () => {
   const { confirm } = useCheckout();
-  const { setPaymentError, setPaymentLoading, activatePaymentStatus } =
-    use(CheckoutContext);
+  const { setState, activatePaymentStatus } = use(CheckoutContext);
 
   return useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -15,16 +14,19 @@ export const useSubmitPayment = () => {
         .then(result => {
           if (result.type === "error") {
             if (!!result.error.code) {
-              setPaymentError(result.error.message);
+              setState(ps => ({ ...ps, paymentError: result.error.message }));
             }
-            setPaymentLoading(false);
+            setState(ps => ({ ...ps, paymentLoading: false }));
           }
         })
         .catch(() => {
-          setPaymentLoading(false);
-          setPaymentError("Something went wrong. Please try again");
+          setState(ps => ({
+            ...ps,
+            paymentLoading: false,
+            paymentError: "Something went wrong. Please try again",
+          }));
         });
     },
-    [confirm, setPaymentLoading, setPaymentError, activatePaymentStatus],
+    [confirm, setState, activatePaymentStatus],
   );
 };

@@ -17,6 +17,9 @@ export async function POST(request: Request) {
       JSON.stringify({
         order_id: session.payment_intent,
         success: session.status === "complete",
+        email: session.customer_details?.email ?? null,
+        shippingDetails:
+          session.collected_information?.shipping_details ?? null,
       }),
     );
   } catch {

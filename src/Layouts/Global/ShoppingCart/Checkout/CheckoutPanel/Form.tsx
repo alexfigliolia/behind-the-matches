@@ -16,7 +16,7 @@ export const Form = (_: Propless) => {
   const checkout = useCheckout();
   const onSubmit = useSubmitPayment();
   const [emailError, setEmailError] = useState("");
-  const { setEmail, setShippingAddress } = use(CheckoutContext);
+  const { setState } = use(CheckoutContext);
 
   const onBlurEmail = useCallback(
     (e: FocusEvent<HTMLInputElement>) => {
@@ -29,20 +29,20 @@ export const Form = (_: Propless) => {
           setEmailError("A valid email address is required");
         } else {
           setEmailError("");
-          setEmail(e.target.value);
+          setState(ps => ({ ...ps, email: e.target.value }));
         }
       });
     },
-    [checkout, setEmail],
+    [checkout, setState],
   );
 
   const onShippingChange = useCallback(
     (e: StripeAddressElementChangeEvent) => {
       if (e.complete) {
-        setShippingAddress(e.value);
+        setState(ps => ({ ...ps, shippingAddress: e.value }));
       }
     },
-    [setShippingAddress],
+    [setState],
   );
 
   return (

@@ -30,42 +30,46 @@ export const ConfirmationPanel = (props: PanelProps) => {
               <p>{cartTotal}</p>
             </div>
           </div>
-          <div className="shipping-to">
-            <h3 className="summary-item">Shipping To:</h3>
-            <address>
-              <div>
-                <p>
-                  <strong>Name:</strong>
-                </p>
-                <p>{shippingAddress.name}</p>
-              </div>
-              <div>
-                <p>
-                  <strong>Address:</strong>
-                </p>
-                <p>
-                  {shippingAddress.address.line1}
-                  {shippingAddress.address.line2 && (
-                    <Fragment>
-                      <br />
-                      {shippingAddress.address.line2}
-                    </Fragment>
-                  )}
-                  <br />
-                  {shippingAddress.address.city},{" "}
-                  {shippingAddress.address.state}
-                  <br />
-                  {shippingAddress.address.postal_code}
-                </p>
-              </div>
-              <div>
-                <p>
-                  <strong>Email:</strong>
-                </p>
-                <p>{email}</p>
-              </div>
-            </address>
-          </div>
+          {shippingAddress && (
+            <div className="shipping-to">
+              <h3 className="summary-item">Shipping To:</h3>
+              <address>
+                <div>
+                  <p>
+                    <strong>Name:</strong>
+                  </p>
+                  <p>{shippingAddress.name}</p>
+                </div>
+                <div>
+                  <p>
+                    <strong>Address:</strong>
+                  </p>
+                  <p>
+                    {shippingAddress.address.line1}
+                    {shippingAddress.address.line2 && (
+                      <Fragment>
+                        <br />
+                        {shippingAddress.address.line2}
+                      </Fragment>
+                    )}
+                    <br />
+                    {shippingAddress.address.city},{" "}
+                    {shippingAddress.address.state}
+                    <br />
+                    {shippingAddress.address.postal_code}
+                  </p>
+                </div>
+                {email && (
+                  <div>
+                    <p>
+                      <strong>Email:</strong>
+                    </p>
+                    <p>{email}</p>
+                  </div>
+                )}
+              </address>
+            </div>
+          )}
         </div>
       </div>
     </Panel>

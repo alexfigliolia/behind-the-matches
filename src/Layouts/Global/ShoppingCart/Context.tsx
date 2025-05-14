@@ -2,7 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import {
   createContext,
-  type Dispatch,
+  Dispatch,
   SetStateAction,
   useCallback,
   useEffect,
@@ -19,78 +19,51 @@ import { Currency } from "Tools/Currency";
 import { ModalStack } from "Tools/ModalStack";
 import { ShoppingCart } from "Tools/ShoppingCart";
 import { Stripe } from "Tools/Stripe";
+import { CartProduct, ShippingDetails } from "Types/Checkout";
 import { Callback } from "Types/Generics";
 import { OptionalChildren } from "Types/React";
 
-const EMPTY_ADDRESS = {
-  name: "",
-  address: {
-    line1: "",
-    line2: "",
-    city: "",
-    state: "",
-    postal_code: "",
-    country: "",
-  },
-  phone: "",
-} satisfies ShippingAddress;
-
-export const CheckoutContext = createContext<ICheckoutContext>({
+const INITIAL_STATE: UIState = {
   open: false,
-  email: "",
+  email: null,
   orderId: "",
-  products: {},
-  cartItems: [],
-  cartTotal: "0.00",
   checkingOut: false,
   paymentError: "",
-  shippingAddress: EMPTY_ADDRESS,
+  shippingAddress: null,
   paymentLoading: false,
   confirmation: false,
   showPaymentStatus: false,
-  setEmail: () => {},
-  activatePaymentStatus: () => {},
-  setPaymentError: () => {},
-  setPaymentLoading: () => {},
-  setShippingAddress: () => {},
-  resetPaymentStatus: () => {},
+};
+
+export const CheckoutContext = createContext<ICheckoutContext>({
+  products: {},
+  cartItems: [],
+  cartTotal: "0.00",
+  ...INITIAL_STATE,
+  setState: () => {},
   toggle: ModalStack.create(
     () => {},
     () => {},
   ),
+  resetPaymentStatus: () => {},
+  activatePaymentStatus: () => {},
 });
 
 export const CheckoutProvider = Suspended(({ children, products }: Props) => {
   const searchParams = useSearchParams();
-  const [open, setOpen] = useState(false);
   const productsInCart = useShoppingCart();
   const replace = useReplaceSearchParams();
-  const [email, setEmail] = useState("");
-  const [orderId, setOrderId] = useState("");
-  const [confirmation, setConfirmation] = useState(false);
-  const [shippingAddress, setShippingAddress] =
-    useState<ShippingAddress>(EMPTY_ADDRESS);
-  const [paymentError, setPaymentError] = useState("");
-  const [checkingOut, activateCheckout] = useState(false);
-  const [paymentLoading, setPaymentLoading] = useState(false);
-  const [showPaymentStatus, setShowPaymentStatus] = useState(false);
+  const [state, setState] = useState(INITIAL_STATE);
 
   const openCheckout = useCallback(() => {
-    setOpen(true);
-    activateCheckout(true);
-  }, [setOpen]);
+    setState(ps => ({ ...ps, open: true, checkingOut: true }));
+  }, []);
 
   const closeCheckout = useCallback(() => {
-    setOpen(false);
+    setState(ps => ({ ...ps, open: false }));
     setTimeout(() => {
-      setEmail("");
-      setOrderId("");
-      setConfirmation(false);
-      activateCheckout(false);
-      setPaymentError("");
-      setPaymentLoading(false);
-      setShippingAddress(EMPTY_ADDRESS);
-      if (confirmation) {
+      setState(INITIAL_STATE);
+      if (state.confirmation) {
         ShoppingCart.clearCart();
         replace(p => {
           p.delete("cart");
@@ -98,20 +71,22 @@ export const CheckoutProvider = Suspended(({ children, products }: Props) => {
         });
       }
     }, 300);
-  }, [confirmation, replace]);
+  }, [state.confirmation, replace]);
 
   const resetPaymentStatus = useCallback(() => {
-    setShowPaymentStatus(false);
+    setState(ps => ({ ...ps, showPaymentStatus: false }));
     setTimeout(() => {
-      setPaymentLoading(false);
-      setPaymentError("");
+      setState(ps => ({ ...ps, paymentLoading: false, paymentError: "" }));
     }, 500);
   }, []);
 
   const activatePaymentStatus = useCallback(() => {
-    setShowPaymentStatus(true);
-    setPaymentLoading(true);
-    setPaymentError("");
+    setState(ps => ({
+      ...ps,
+      paymentError: "",
+      paymentLoading: true,
+      showPaymentStatus: true,
+    }));
   }, []);
 
   const toggle = useModalToggle(openCheckout, closeCheckout);
@@ -122,14 +97,19 @@ export const CheckoutProvider = Suspended(({ children, products }: Props) => {
       return;
     }
     void Stripe.checkPaymentStatus(session_id)
-      .then(({ success, order_id }) => {
+      .then(({ success, email, order_id, shippingDetails }) => {
         if (success) {
-          setOrderId(order_id);
-          setConfirmation(true);
-          setOpen(true);
+          setState(ps => ({
+            ...ps,
+            email,
+            open: true,
+            orderId: order_id,
+            confirmation: true,
+            shippingAddress: shippingDetails,
+          }));
         }
       })
-      .finally(() => setPaymentLoading(false));
+      .finally(() => setState(ps => ({ ...ps, paymentLoading: false })));
   }, [searchParams]);
 
   const { cartTotal, cartItems } = useMemo(() => {
@@ -154,40 +134,21 @@ export const CheckoutProvider = Suspended(({ children, products }: Props) => {
 
   const value = useMemo(
     () => ({
-      open,
-      email,
+      ...state,
+      setState,
       toggle,
-      orderId,
-      setEmail,
       cartItems,
       cartTotal,
       products,
-      checkingOut,
-      paymentError,
-      confirmation,
-      shippingAddress,
-      paymentLoading,
-      showPaymentStatus,
-      setPaymentError,
-      setPaymentLoading,
-      setShippingAddress,
       resetPaymentStatus,
       activatePaymentStatus,
     }),
     [
-      open,
-      email,
+      state,
       toggle,
-      orderId,
       cartItems,
       cartTotal,
       products,
-      checkingOut,
-      confirmation,
-      paymentError,
-      paymentLoading,
-      shippingAddress,
-      showPaymentStatus,
       resetPaymentStatus,
       activatePaymentStatus,
     ],
@@ -199,41 +160,24 @@ interface Props extends OptionalChildren {
   products: Record<string, IStripe.Product>;
 }
 
-interface ICheckoutContext {
-  open: boolean;
-  email: string;
-  orderId: string;
+interface ICheckoutContext extends UIState {
   cartTotal: string;
-  checkingOut: boolean;
-  paymentError: string;
-  confirmation: boolean;
   cartItems: CartProduct[];
-  paymentLoading: boolean;
-  showPaymentStatus: boolean;
   toggle: ModalToggle<never[]>;
   resetPaymentStatus: Callback;
   activatePaymentStatus: Callback;
-  shippingAddress: ShippingAddress;
   products: Record<string, IStripe.Product>;
-  setEmail: Dispatch<SetStateAction<string>>;
-  setPaymentError: Dispatch<SetStateAction<string>>;
-  setPaymentLoading: Dispatch<SetStateAction<boolean>>;
-  setShippingAddress: Dispatch<SetStateAction<ShippingAddress>>;
+  setState: Dispatch<SetStateAction<UIState>>;
 }
 
-interface CartProduct extends IStripe.Product {
-  quantity: number;
-}
-
-export interface ShippingAddress {
-  name: string;
-  address: {
-    line1: string;
-    line2: string | null;
-    city: string;
-    state: string;
-    postal_code: string;
-    country: string;
-  };
-  phone?: string;
+interface UIState {
+  open: boolean;
+  email: string | null;
+  orderId: string;
+  checkingOut: boolean;
+  paymentError: string;
+  confirmation: boolean;
+  paymentLoading: boolean;
+  showPaymentStatus: boolean;
+  shippingAddress: ShippingDetails | null;
 }
