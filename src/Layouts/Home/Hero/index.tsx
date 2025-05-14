@@ -1,5 +1,4 @@
 "use client";
-import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { BoundedContent } from "Components/BoundedContent";
 import { CustomizeButton } from "Components/CustomizeButton";
@@ -20,9 +19,7 @@ export const Hero = (_: Propless) => {
       <div className="content">
         <BoundedContent>
           <PageHeading>Behind the matches</PageHeading>
-          <Suspense>
-            <CustomizeButton text="Customize" />
-          </Suspense>
+          <CustomizeButton text="Customize" />
         </BoundedContent>
       </div>
     </Section>

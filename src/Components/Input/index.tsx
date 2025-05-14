@@ -7,6 +7,7 @@ import "./styles.scss";
 export const Input = ({
   label,
   className,
+  children,
   onChange: onExternalChange,
   ...rest
 }: Omit<HTMLProps<HTMLInputElement>, "placeholder">) => {
@@ -17,6 +18,7 @@ export const Input = ({
     <label className={classes}>
       <span>{label}</span>
       <input ref={node} {...rest} onChange={onChange} />
+      {children}
     </label>
   );
 };

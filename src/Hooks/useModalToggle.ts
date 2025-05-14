@@ -1,7 +1,11 @@
-import { useMemo } from "react";
+import { useEffect, useRef } from "react";
 import { ModalStack } from "Tools/ModalStack";
 import { Callback } from "Types/Generics";
 
 export const useModalToggle = (open: Callback, close: Callback) => {
-  return useMemo(() => ModalStack.create(open, close), [open, close]);
+  const toggle = useRef(ModalStack.create(open, close));
+  useEffect(() => {
+    toggle.current.update(open, close);
+  }, [open, close]);
+  return toggle.current;
 };

@@ -1,0 +1,23 @@
+.closer {
+  --base-color: #000;
+  --active-color: var(--action-color);
+  height: 3em;
+  width: 3em;
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 0;
+  border: none;
+  outline: none;
+  &:focus-visible > svg,
+  &:hover > svg {
+    stroke: var(--active-color);
+    filter: drop-shadow(0em 0.1em 0.2em rgba(from var(--active-color) r g b / 70%));
+  }
+  &>svg {
+    width: 100%;
+    height: 100%;
+    transition: all 0.4s;
+    stroke: var(--base-color);
+    filter: drop-shadow(0em 0.1em 0.2em rgba(from var(--active-color) r g b / 0%));
+  }
+}

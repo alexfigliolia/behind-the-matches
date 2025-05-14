@@ -2,6 +2,8 @@
 
 .input {
   --border-color: #000;
+  --label-color: var(--border-color);
+  --text-color: var(--label-color);
   --background-color: #fff;
   width: 100%;
   max-width: 500px;
@@ -35,7 +37,7 @@
     top: 20px;
     left: 0.5em;
     translate: 0 -50%;
-    color: var(--border-color);
+    color: var(--label-color);
     background: var(--background-color);
     border-radius: 2em;
     padding: 0.1em 0.25em;
@@ -45,7 +47,7 @@
   &>input,
   &>textarea {
     width: 100%;
-    color: var(--border-color);
+    color: var(--text-color);
     border: 1px solid var(--border-color);
     border-radius: 0.25em;
     background: var(--background-color);

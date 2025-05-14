@@ -1,12 +1,11 @@
+import { ButtonHTMLAttributes } from "react";
 import { classnames } from "@figliolia/classnames";
-import { Callback } from "Types/Generics";
 import "./styles.scss";
 
-export const Button = ({ text, onClick, className, ...rest }: Props) => {
+export const Button = ({ text, className, ...rest }: Props) => {
   return (
     <button
       className={classnames("cta-button", className)}
-      onClick={onClick}
       data-text={text}
       {...rest}>
       {text}
@@ -14,9 +13,6 @@ export const Button = ({ text, onClick, className, ...rest }: Props) => {
   );
 };
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  onClick?: Callback;
-  className?: string;
-  disabled?: boolean;
 }

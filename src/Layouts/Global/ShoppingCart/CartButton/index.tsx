@@ -1,14 +1,15 @@
 "use client";
 import { useMemo } from "react";
-import { useOpenCart } from "Hooks/useOpenCart";
+import { Suspended } from "HOCs/Suspended";
 import { useShoppingCart } from "Hooks/useShoppingCart";
+import { useToggleShoppingCart } from "Hooks/useToggleShoppingCart";
 import { ShoppingBag } from "Icons/ShoppingBag";
 import { Propless } from "Types/React";
 import "./styles.scss";
 
-export const CartButton = (_: Propless) => {
+export const CartButton = Suspended((_: Propless) => {
   const cart = useShoppingCart();
-  const openCart = useOpenCart();
+  const { openCart } = useToggleShoppingCart();
   const total = useMemo(
     () =>
       Object.values(cart).reduce((acc, next) => {
@@ -29,4 +30,4 @@ export const CartButton = (_: Propless) => {
       <div>{total}</div>
     </button>
   );
-};
+});

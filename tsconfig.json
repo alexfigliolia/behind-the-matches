@@ -33,6 +33,9 @@
       "Declarations/*": [
         "./Declarations/*"
       ],
+      "HOCs/*": [
+        "./HOCs/*"
+      ],
       "Hooks/*": [
         "./Hooks/*"
       ],

@@ -1,20 +1,19 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Stripe from "stripe";
 import { AddToCartButton } from "Components/AddToCartButton";
 import { BottomSheet } from "Components/BottomSheet";
 import { Button } from "Components/Button";
 import { ProductPrice } from "Components/ProductPrice";
 import { Slider } from "Components/Slider";
+import { Suspended } from "HOCs/Suspended";
 import { useModalToggle } from "Hooks/useModalToggle";
-import { useMutateParams } from "Hooks/useMutateParams";
+import { useReplaceSearchParams } from "Hooks/useReplaceSearchParams";
 import "./styles.scss";
 
-export const ProductSheet = ({ product }: Props) => {
-  const nav = useRouter();
+export const ProductSheet = Suspended(({ product }: Props) => {
   const [open, setOpen] = useState(false);
-  const paramsMutator = useMutateParams();
+  const replace = useReplaceSearchParams();
   const [selectedProduct, setSelectedProduct] = useState(product);
 
   const openSheet = useCallback(() => {
@@ -24,12 +23,9 @@ export const ProductSheet = ({ product }: Props) => {
   const close = useCallback(() => {
     setOpen(false);
     setTimeout(() => {
-      const params = paramsMutator(p => p.delete("product"));
-      nav.replace(`/shop${params}`, {
-        scroll: false,
-      });
+      replace(p => p.delete("product"));
     }, 400);
-  }, [nav, paramsMutator]);
+  }, [replace]);
 
   const toggle = useModalToggle(openSheet, close);
 
@@ -69,14 +65,12 @@ export const ProductSheet = ({ product }: Props) => {
         />
         <div>
           <Button text="Back" onClick={close} />
-          <Suspense>
-            <AddToCartButton productID={selectedProduct?.id as string} />
-          </Suspense>
+          <AddToCartButton productID={selectedProduct?.id as string} />
         </div>
       </footer>
     </BottomSheet>
   );
-};
+});
 
 interface Props {
   product: Stripe.Product | undefined;

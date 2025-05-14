@@ -1,0 +1,101 @@
+.panel.confirm {
+  padding-bottom: var(--layout-padding);
+  & .closer {
+    top: 0;
+    right: 1em;
+    position: absolute;
+    z-index: 2;
+    @media(min-width: 670px) {
+      right: 1.5em;
+    }
+  }
+  & h2 {
+    margin-bottom: 0.25em;
+  }
+  & p {
+    margin: 0;
+  }
+  & .summary-item {
+    font-size: 1.35em;
+    margin-bottom: 0.25em;
+  }
+  & .order-number {
+    padding: 0.5em 1em;
+    border-radius: 0.25em;
+    width: max-content;
+    color: #1d1c1c;
+    background: rgb(from #1d1c1c r g b / 5%);
+    transform: skewX(-5deg);
+    font-weight: 700;
+    margin-top: 1em;
+    &>div {
+      transform: skewX(5deg);
+    }
+  }
+  & .order-summary {
+    width: 100%;
+    @media (min-width: 967px) {
+      display: flex;
+      flex-direction: row;
+      gap: 5em;
+    }
+    &>div {
+      width: 100%;
+      &>ul,
+      &>address {
+        width: 100%;
+        border-top: 1px solid rgba(from #333131 r g b / 20%);
+      }
+    }
+    &>.items {
+      &>ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        &>.cart-item {
+          --text-color: #333131;
+          --offset-color:#fff;
+          &>.display {
+            justify-content: flex-start;
+          }
+        }
+      }
+      &>div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &>p {
+          font-size: 1.1em;
+          font-weight: 700;
+          text-align: right;
+          padding: 0.5em 0;
+        }
+      }
+    }
+    &>.shipping-to {
+      &>address {
+        padding: 1em 0;
+        font-style: normal;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em;
+        &>div {
+          width: 100%;
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 1em;
+          & p {
+            text-align: right;
+            line-height: 1.5;
+            &:last-of-type {
+              flex: 1;
+              max-width: 100%;
+              word-break: break-all;
+            }
+          }
+        }
+      }
+    }
+  }
+}

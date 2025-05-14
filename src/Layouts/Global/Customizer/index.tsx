@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { BottomSheet } from "Components/BottomSheet";
 import { Button } from "Components/Button";
@@ -7,17 +7,16 @@ import { GalleryImages } from "Components/GalleryImages";
 import { Input } from "Components/Input";
 import { Slider } from "Components/Slider";
 import { TextArea } from "Components/TextArea";
+import { Suspended } from "HOCs/Suspended";
 import { useModalToggle } from "Hooks/useModalToggle";
-import { useMutateParams } from "Hooks/useMutateParams";
+import { useReplaceSearchParams } from "Hooks/useReplaceSearchParams";
 import { Propless } from "Types/React";
 import "./styles.scss";
 
-export const Customizer = (_: Propless) => {
-  const nav = useRouter();
+export const Customizer = Suspended((_: Propless) => {
   const params = useSearchParams();
-  const pathname = usePathname();
+  const replace = useReplaceSearchParams();
   const [open, setOpen] = useState(false);
-  const paramsMutator = useMutateParams();
 
   const openSheet = useCallback(() => {
     setOpen(true);
@@ -26,13 +25,9 @@ export const Customizer = (_: Propless) => {
   const close = useCallback(() => {
     setOpen(false);
     setTimeout(() => {
-      console.log(pathname);
-      const params = paramsMutator(p => p.delete("customizer"));
-      nav.replace(`${pathname}${params}`, {
-        scroll: false,
-      });
+      replace(p => p.delete("customizer"));
     }, 400);
-  }, [nav, paramsMutator, pathname]);
+  }, [replace]);
 
   const toggle = useModalToggle(openSheet, close);
 
@@ -71,4 +66,4 @@ export const Customizer = (_: Propless) => {
       </div>
     </BottomSheet>
   );
-};
+});

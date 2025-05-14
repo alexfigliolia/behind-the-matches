@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import IStripe from "stripe";
 import { BoundedContent } from "Components/BoundedContent";
 import { PageHeading } from "Components/PageHeading";
@@ -38,9 +37,7 @@ export default async function Shop({
             <p>The shop will update periodically with new products</p>
           </header>
           <ProductGrid products={products.data} />
-          <Suspense>
-            <CustomizeYourOwn />
-          </Suspense>
+          <CustomizeYourOwn />
         </BoundedContent>
         <div className="reviews">
           <ProductReview
@@ -54,9 +51,7 @@ export default async function Shop({
           />
         </div>
       </Section>
-      <Suspense>
-        <ProductSheet product={selectedProduct} />
-      </Suspense>
+      <ProductSheet product={selectedProduct} />
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import { Fragment, Suspense, useMemo, useRef } from "react";
+import { Fragment, useMemo, useRef } from "react";
 import { OrbitControls, Stage } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Art } from "3D/Art";
@@ -25,9 +25,7 @@ export function Scene(_: Propless) {
       <OrbitControls autoRotate autoRotateSpeed={0.4} enableZoom={false} />
       <ambientLight intensity={10} />
       <Stage shadows="contact" intensity={0.5}>
-        <Suspense>
-          <Art />
-        </Suspense>
+        <Art />
       </Stage>
     </Fragment>
   );

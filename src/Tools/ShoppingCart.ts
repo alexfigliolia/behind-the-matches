@@ -49,4 +49,12 @@ export class ShoppingCart {
     delete cart[id];
     client.setItem("btm_cart", cart);
   }
+
+  public static clearCart() {
+    const client = BrowserStorage.getClient();
+    if (!client) {
+      return;
+    }
+    client.removeItem("btm_cart");
+  }
 }

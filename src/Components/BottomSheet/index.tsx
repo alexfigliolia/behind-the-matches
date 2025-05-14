@@ -6,11 +6,23 @@ import { Callback } from "Types/Generics";
 import { OptionalChildren } from "Types/React";
 import "./styles.scss";
 
-export const BottomSheet = ({ children, open, close, className }: Props) => {
+export const BottomSheet = ({
+  children,
+  open,
+  close,
+  className,
+  clickOutside,
+}: Props) => {
   const classes = useClassNames("btm-bottom-sheet", className);
   return (
     <Portal>
-      <BottomSheetImpl dim notch open={open} close={close} className={classes}>
+      <BottomSheetImpl
+        dim
+        notch
+        open={open}
+        close={close}
+        className={classes}
+        clickOutside={clickOutside}>
         {children}
       </BottomSheetImpl>
     </Portal>
@@ -21,4 +33,5 @@ interface Props extends OptionalChildren {
   open: boolean;
   close: Callback;
   className?: string;
+  clickOutside?: boolean;
 }

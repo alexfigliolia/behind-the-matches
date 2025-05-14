@@ -1,9 +1,11 @@
-import { Suspense } from "react";
+import { Fragment } from "react";
 import IStripe from "stripe";
 import { Stripe } from "Tools/Stripe";
 import { Propless } from "Types/React";
 import { Cart } from "./Cart";
 import { CartButton } from "./CartButton";
+import { Checkout } from "./Checkout";
+import { CheckoutProvider } from "./Context";
 
 export const ShoppingCart = async (_: Propless) => {
   const products = await Stripe.getClient().products.list({
@@ -16,9 +18,12 @@ export const ShoppingCart = async (_: Propless) => {
     table[product.id] = product;
   }
   return (
-    <Suspense>
+    <Fragment>
       <CartButton />
-      <Cart products={table} />
-    </Suspense>
+      <CheckoutProvider products={table}>
+        <Cart />
+        <Checkout />
+      </CheckoutProvider>
+    </Fragment>
   );
 };

@@ -14,4 +14,4 @@ export const useMutateParams = () => {
   );
 };
 
-type ParamsMutator = (params: URLSearchParams) => void;
+export type ParamsMutator = (params: URLSearchParams) => void;

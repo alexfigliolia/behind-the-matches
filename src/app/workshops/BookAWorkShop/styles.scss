@@ -13,26 +13,7 @@
   & .closer {
     top: 1em;
     right: 1em;
-    height: 50px;
-    width: 50px;
     position: absolute;
-    background-color: transparent;
-    border-radius: 50%;
-    padding: 0;
-    border: none;
-    outline: none;
-    &:focus-visible > svg,
-    &:hover > svg {
-      stroke: var(--action-color);
-      filter: drop-shadow(0em 0.1em 0.2em rgba(from var(--action-color) r g b / 70%));
-    }
-    &>svg {
-      width: 100%;
-      height: 100%;
-      stroke: #000;
-      transition: all 0.4s;
-      filter: drop-shadow(0em 0.1em 0.2em rgba(from var(--action-color) r g b / 0%));
-    }
   }
   & h2 {
     font-size: 1.75em;

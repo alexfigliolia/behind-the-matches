@@ -7,6 +7,8 @@ export const useShoppingCart = () => {
     const ID = ShoppingCart.subscribe(cart => {
       if (cart) {
         setItems(cart);
+      } else {
+        setItems({});
       }
     });
     if (!ID) {

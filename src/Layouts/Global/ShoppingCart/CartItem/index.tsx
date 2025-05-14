@@ -9,6 +9,7 @@ export const CartItem = ({
   id,
   images,
   name,
+  editable,
   quantity,
   description,
   default_price,
@@ -17,7 +18,6 @@ export const CartItem = ({
     () => ((default_price as Stripe.Price).unit_amount ?? 0) * quantity,
     [default_price, quantity],
   );
-
   return (
     <li key={id} className="cart-item">
       <div className="display">
@@ -34,8 +34,16 @@ export const CartItem = ({
         </div>
       </div>
       <div className="actions">
-        <Quantity productID={id} quantity={quantity} />
-        <p>${Currency.format(total / 100)}</p>
+        {editable ? (
+          <Quantity productID={id} quantity={quantity} />
+        ) : (
+          <p>
+            <span>Total: {quantity}</span>
+          </p>
+        )}
+        <p>
+          <span>${Currency.format(total / 100)}</span>
+        </p>
       </div>
     </li>
   );
@@ -43,4 +51,5 @@ export const CartItem = ({
 
 interface Props extends Stripe.Product {
   quantity: number;
+  editable?: boolean;
 }

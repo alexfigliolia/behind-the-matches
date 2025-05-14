@@ -19,7 +19,9 @@ export const Quantity = ({ quantity, productID }: Props) => {
       <button onClick={decrease}>
         <ChevronDown aria-hidden />
       </button>
-      <div>{quantity}</div>
+      <div>
+        <div>{quantity}</div>
+      </div>
       <button onClick={increase}>
         <ChevronUp aria-hidden />
       </button>

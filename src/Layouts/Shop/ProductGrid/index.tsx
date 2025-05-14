@@ -1,4 +1,4 @@
-import { Suspense, useMemo } from "react";
+import { useMemo } from "react";
 import Stripe from "stripe";
 import { Product } from "./Product";
 import "./styles.scss";
@@ -16,25 +16,23 @@ export const ProductGrid = ({ products, min = 3 }: Props) => {
   );
   return (
     <div className="product-grid">
-      <Suspense>
-        {products.map(product => {
-          const price = product.default_price as Stripe.Price;
-          if (!price.unit_amount) {
-            return null;
-          }
-          return <Product key={product.id} product={product} />;
-        })}
-        {fill.map((_, i) => {
-          return (
-            <Product
-              key={i}
-              disabled
-              // @ts-ignore
-              product={EMPTY_PRODUCT}
-            />
-          );
-        })}
-      </Suspense>
+      {products.map(product => {
+        const price = product.default_price as Stripe.Price;
+        if (!price.unit_amount) {
+          return null;
+        }
+        return <Product key={product.id} product={product} />;
+      })}
+      {fill.map((_, i) => {
+        return (
+          <Product
+            key={i}
+            disabled
+            // @ts-ignore
+            product={EMPTY_PRODUCT}
+          />
+        );
+      })}
     </div>
   );
 };

@@ -23,7 +23,8 @@
     color: var(--base-color);
     text-decoration: none;
   }
-  &:hover {
+  &:hover,
+  &:focus-visible {
     &::after {
       scale: 1 1;
     }
