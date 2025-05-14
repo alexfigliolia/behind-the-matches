@@ -67,7 +67,7 @@ export const CheckoutProvider = Suspended(({ children, products }: Props) => {
   const replace = useReplaceSearchParams();
   const [email, setEmail] = useState("");
   const [orderId, setOrderId] = useState("");
-  const [confirmation, setConfirmation] = useState(true);
+  const [confirmation, setConfirmation] = useState(false);
   const [shippingAddress, setShippingAddress] =
     useState<ShippingAddress>(EMPTY_ADDRESS);
   const [paymentError, setPaymentError] = useState("");
