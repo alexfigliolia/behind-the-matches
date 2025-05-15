@@ -25,11 +25,17 @@
     margin: auto;
     @include Variables.center;
     flex-direction: column;
-    margin-bottom: 2em;
+    margin-bottom: 6em;
     gap: 1em;
-    & button {
-      width: 100%;
-      font-size: 1.1em;
+    &>.status-footer > div > .status > div {
+      &>.error-text,
+      &>.success-text {
+        &>p {
+          @media (min-width: 670px) {
+            font-size: 1em;
+          }
+        }
+      }
     }
   }
 }
