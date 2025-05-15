@@ -1,0 +1,20 @@
+.loading-text {
+  font-size: 1em;
+  margin: 0;
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  background-image: linear-gradient(to right, #fff, #515050, #515050, #fff, #fff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: background-position 2s infinite forwards linear;
+}
+
+@keyframes background-position {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

@@ -3,14 +3,18 @@
 .panel.checkout {
   & .padded {
     & .input {
-      max-width: 50%;
+      width: 100%;
+      max-width: unset;
+      @media (min-width: 957px) {
+        width: 50%;
+      }
       --border-color: #d0cece;
       --label-color: #252424;
       & > span {
         font-weight: 300;
       }
       &>.input-error {
-        color: var(--action-color);
+        color: var(--red);
         font-size: 0.9em;
         max-height: 0px;
         opacity: 0;
@@ -19,7 +23,7 @@
     }
   }
   & form {
-    margin-bottom: 8em;
+    margin-bottom: 14em;
   }
 }
   

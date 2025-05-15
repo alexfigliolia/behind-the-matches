@@ -13,7 +13,6 @@ export const Input = ({
 }: Omit<HTMLProps<HTMLInputElement>, "placeholder">) => {
   const { node, onChange, valid, filled } = useInputState(onExternalChange);
   const classes = useClassNames("input", className, { valid, filled });
-
   return (
     <label className={classes}>
       <span>{label}</span>

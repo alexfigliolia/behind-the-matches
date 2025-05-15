@@ -1,0 +1,128 @@
+@use "Styles/Variables";
+
+.modal-footer.status-footer {
+  &>div {
+    overflow: hidden;
+    &>.actions,
+    &>.status {
+      transition: translate 1s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    &>.actions {
+      height: 100%;
+    }
+    &>.status {
+      translate: 0% 100%;
+      background-color: var(--black);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      &>div {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        @include Variables.center;
+        &>.loading-text,
+        &>.success-text,
+        &>.error-text {
+          transition: opacity 0.5s;
+          &>p {
+            margin: 0;
+          }
+        }
+        &>.loading-text {
+          font-size: 1.5em;
+          @media (min-width: 850px) {
+            font-size: 2em;
+          }
+        }
+        &>.success-text,
+        &>.error-text {
+          opacity: 0;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          display: flex;
+          pointer-events: none;
+          padding: 0 var(--layout-padding);
+          align-items: center;
+          justify-content: space-between;
+          gap: 2em;
+          &>button {
+            font-size: 1em;
+            white-space: nowrap;
+            min-width: max-content;
+            --base-color: #fff;
+            --overlay-color: #000;
+          }
+          &>p {
+            font-weight: 700;
+            text-align: left;
+            @include Variables.center;
+            gap: 0.5em;
+            @media (min-width: 670px) {
+              font-size: 1.15em;
+            }
+            &>svg {
+              width: 2em;
+              height: 2em;
+            }
+          }
+        }
+        &>.error-text > p {
+          color: var(--red);
+          &>svg {
+            fill: var(--red);
+          }
+        }
+        &>.success-text > p {
+          color: var(--green);
+          &>svg {
+            fill: var(--green);
+          }
+        }
+      }
+    }
+  }
+  &.showStatus {
+    &>div {
+      &>.actions {
+        translate: 0% -100%;
+      }
+      &>.status {
+        translate: 0% 0%;
+      }
+    }
+  }
+  &.error {
+    &>div > .status > div {
+      &>.loading-text {
+        opacity: 0;
+      }
+      &>.error-text {
+        opacity: 1;
+        pointer-events: all;
+      }
+      &>.success-text {
+        opacity: 0;
+      }
+    }
+  }
+  &.success {
+    &>div > .status > div {
+      &>.loading-text {
+        opacity: 0;
+      }
+      &>.error-text {
+        opacity: 0;
+      }
+      &>.success-text {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+}
