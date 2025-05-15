@@ -66,31 +66,28 @@
       transition: opacity 0.5s 0s;
     }
   }
-  &>.total {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  &>.total.status-footer {
     background-color: #fff;
-    gap: 1em;
     position: sticky;
-    padding: 1em var(--layout-padding);
     bottom: 0;
     right: 0;
     translate: 0 100%;
     opacity: 0;
     transition: all 0.35s 0s;
     box-shadow: 0em 0.4em 0.7em rgba(#000, 0.2);
-    &>p {
-      margin: 0;
-      color: #272626;
-      font-size: 1.5em;
-      font-weight: 600;
-    }
-    &>button {
-      font-size: 1em;
-      &:disabled {
-        opacity: 0.15;
+    &>div > .actions {
+      justify-content: space-between;
+      &>p {
+        margin: 0;
+        color: #272626;
+        font-size: 1.5em;
+        font-weight: 600;
+      }
+      &>button {
+        font-size: 1em;
+        &:disabled {
+          opacity: 0.15;
+        }
       }
     }
   }

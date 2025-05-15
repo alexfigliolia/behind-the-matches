@@ -27,6 +27,7 @@ const INITIAL_STATE: UIState = {
   open: false,
   email: null,
   orderId: "",
+  elementsLoading: false,
   checkingOut: false,
   paymentError: "",
   shippingAddress: null,
@@ -45,6 +46,7 @@ export const CheckoutContext = createContext<ICheckoutContext>({
     () => {},
     () => {},
   ),
+  loadStripeCheckout: () => {},
   resetPaymentStatus: () => {},
   activatePaymentStatus: () => {},
 });
@@ -55,8 +57,16 @@ export const CheckoutProvider = Suspended(({ children, products }: Props) => {
   const replace = useReplaceSearchParams();
   const [state, setState] = useState(INITIAL_STATE);
 
+  const loadStripeCheckout = useCallback(() => {
+    setState(ps => ({
+      ...ps,
+      checkingOut: true,
+      elementsLoading: true,
+    }));
+  }, []);
+
   const openCheckout = useCallback(() => {
-    setState(ps => ({ ...ps, open: true, checkingOut: true }));
+    setState(ps => ({ ...ps, open: true, elementsLoading: false }));
   }, []);
 
   const closeCheckout = useCallback(() => {
@@ -140,6 +150,7 @@ export const CheckoutProvider = Suspended(({ children, products }: Props) => {
       cartItems,
       cartTotal,
       products,
+      loadStripeCheckout,
       resetPaymentStatus,
       activatePaymentStatus,
     }),
@@ -149,6 +160,7 @@ export const CheckoutProvider = Suspended(({ children, products }: Props) => {
       cartItems,
       cartTotal,
       products,
+      loadStripeCheckout,
       resetPaymentStatus,
       activatePaymentStatus,
     ],
@@ -164,6 +176,7 @@ interface ICheckoutContext extends UIState {
   cartTotal: string;
   cartItems: CartProduct[];
   toggle: ModalToggle<never[]>;
+  loadStripeCheckout: Callback;
   resetPaymentStatus: Callback;
   activatePaymentStatus: Callback;
   products: Record<string, IStripe.Product>;
@@ -178,6 +191,7 @@ interface UIState {
   paymentError: string;
   confirmation: boolean;
   paymentLoading: boolean;
+  elementsLoading: boolean;
   showPaymentStatus: boolean;
   shippingAddress: ShippingDetails | null;
 }

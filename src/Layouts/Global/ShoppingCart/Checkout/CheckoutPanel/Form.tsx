@@ -16,7 +16,11 @@ export const Form = (_: Propless) => {
   const checkout = useCheckout();
   const onSubmit = useSubmitPayment();
   const [emailError, setEmailError] = useState("");
-  const { setState } = use(CheckoutContext);
+  const { setState, toggle } = use(CheckoutContext);
+
+  const onStipeReady = useCallback(() => {
+    toggle.open();
+  }, [toggle]);
 
   const onBlurEmail = useCallback(
     (e: FocusEvent<HTMLInputElement>) => {
@@ -66,6 +70,7 @@ export const Form = (_: Propless) => {
                 billingDetails: "auto",
               },
             }}
+            onReady={onStipeReady}
           />
           <h3>Shipping Details</h3>
           <AddressElement

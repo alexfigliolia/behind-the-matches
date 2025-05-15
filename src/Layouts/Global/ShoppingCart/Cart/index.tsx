@@ -1,9 +1,10 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { Fragment, useCallback, useContext, useEffect, useState } from "react";
 import { useClassNames } from "@figliolia/classnames";
 import { Button } from "Components/Button";
 import { Closer } from "Components/Closer";
+import { ModalFormFooter } from "Components/ModalFormFooter";
 import { Portal } from "Components/Portal";
 import { SplitText } from "Components/SplitText";
 import { Suspended } from "HOCs/Suspended";
@@ -20,11 +21,8 @@ export const Cart = Suspended((_: Propless) => {
   const replace = useReplaceSearchParams();
   const [_width, height] = useWindowSize();
   const [open, setOpen] = useState(false);
-  const {
-    cartItems,
-    cartTotal,
-    toggle: checkoutToggle,
-  } = useContext(CheckoutContext);
+  const { cartItems, cartTotal, elementsLoading, loadStripeCheckout } =
+    useContext(CheckoutContext);
 
   const openCart = useCallback(() => {
     setOpen(true);
@@ -72,14 +70,26 @@ export const Cart = Suspended((_: Propless) => {
             <div className="none">There are no items in your cart</div>
           )}
         </div>
-        <footer className="total">
-          <p>{cartTotal}</p>
-          <Button
-            text="Checkout"
-            disabled={!cartItems.length}
-            onClick={checkoutToggle.open}
-          />
-        </footer>
+        <ModalFormFooter
+          className="total"
+          error={false}
+          success={false}
+          onClose={() => {}}
+          resetState={() => {}}
+          loading={elementsLoading}
+          showStatus={elementsLoading}
+          loadingText="Coming Right Up"
+          actions={
+            <Fragment>
+              <p>{cartTotal}</p>
+              <Button
+                text="Checkout"
+                onClick={loadStripeCheckout}
+                disabled={!cartItems.length || elementsLoading}
+              />
+            </Fragment>
+          }
+        />
       </div>
     </Portal>
   );
