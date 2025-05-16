@@ -5,11 +5,11 @@
     & .input {
       width: 100%;
       max-width: unset;
+      --border-color: #d0cece;
+      --label-color: #252424;
       @media (min-width: 957px) {
         width: 50%;
       }
-      --border-color: #d0cece;
-      --label-color: #252424;
       & > span {
         font-weight: 300;
       }

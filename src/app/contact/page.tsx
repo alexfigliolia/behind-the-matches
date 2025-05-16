@@ -1,9 +1,13 @@
+import { Metadata } from "next";
 import { BoundedContent } from "Components/BoundedContent";
 import { PageHeading } from "Components/PageHeading";
 import { Section } from "Components/Section";
 import { Propless } from "Types/React";
 import { InquiryForm } from "./InquiryForm";
+import { SEO } from "./SEO";
 import "./styles.scss";
+
+export const metadata: Metadata = SEO;
 
 export default function Contact(_: Propless) {
   return (

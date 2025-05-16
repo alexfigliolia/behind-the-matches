@@ -3,6 +3,7 @@ import { Funnel_Display, MonteCarlo } from "next/font/google";
 import { classnames } from "@figliolia/classnames";
 import { Customizer, Footer, Header, ShoppingCart } from "Layouts/Global";
 import { OptionalChildren } from "Types/React";
+import { SEO } from "./SEO";
 import "Styles/Reset.scss";
 
 const funnelDisplay = Funnel_Display({
@@ -16,10 +17,7 @@ const monteCarlo = MonteCarlo({
   weight: "400",
 });
 
-export const metadata: Metadata = {
-  title: "Behind The Matches",
-  description: "Matchbook artwork designed to relive your journies",
-};
+export const metadata: Metadata = SEO;
 
 export default function RootLayout({ children }: OptionalChildren) {
   return (

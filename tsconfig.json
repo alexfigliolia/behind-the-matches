@@ -62,7 +62,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "**/*.mjs",
-    ".prettierrc.mjs"
+    ".prettierrc.mjs",
+    "next-sitemap.config.js",
   ],
   "exclude": [
     ".next",

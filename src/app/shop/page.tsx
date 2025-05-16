@@ -1,17 +1,21 @@
+import { Metadata } from "next";
 import IStripe from "stripe";
 import { BoundedContent } from "Components/BoundedContent";
 import { PageHeading } from "Components/PageHeading";
 import { Section } from "Components/Section";
 import { CustomizeYourOwn, ProductGrid } from "Layouts/Shop";
 import { Stripe } from "Tools/Stripe";
-import { PageProps, Propless } from "Types/React";
+import { PageProps } from "Types/React";
 import { ProductReview } from "./ProductReview";
 import { ProductSheet } from "./ProductSheet";
+import { SEO } from "./SEO";
 import "./styles.scss";
+
+export const metadata: Metadata = SEO;
 
 export default async function Shop({
   searchParams,
-}: PageProps<Propless, { product: string | undefined }>) {
+}: PageProps<Record<string, never>, { product: string | undefined }>) {
   const [products, { product }] = await Promise.all([
     Stripe.getClient().products.list({
       active: true,

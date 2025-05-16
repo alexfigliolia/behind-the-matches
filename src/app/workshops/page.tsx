@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { BoundedContent } from "Components/BoundedContent";
 import { ButtonLink } from "Components/ButtonLink";
 import { PageHeading } from "Components/PageHeading";
@@ -6,7 +7,10 @@ import { Section } from "Components/Section";
 import { Slider } from "Components/Slider";
 import { Propless } from "Types/React";
 import { BookAWorkShop } from "./BookAWorkShop";
+import { SEO } from "./SEO";
 import "./styles.scss";
+
+export const metadata: Metadata = SEO;
 
 export default function WorkShops(_: Propless) {
   return (
