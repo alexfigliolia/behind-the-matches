@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 
-export type Propless = Record<string, never>;
+export type Propless<T = never> = {
+  ref?: T;
+};
 
 export interface OptionalChildren {
   children?: ReactNode;
