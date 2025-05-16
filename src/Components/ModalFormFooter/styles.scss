@@ -1,6 +1,7 @@
 @use "Styles/Variables";
 
 .modal-footer.status-footer {
+  overflow: hidden;
   &>div {
     overflow: hidden;
     &>.actions,
