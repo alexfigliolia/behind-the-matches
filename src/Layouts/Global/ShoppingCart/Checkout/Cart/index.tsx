@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { Fragment, useCallback, useContext, useEffect, useState } from "react";
+import { Fragment, use, useCallback, useEffect, useState } from "react";
 import { useClassNames } from "@figliolia/classnames";
 import { Button } from "Components/Button";
 import { Closer } from "Components/Closer";
@@ -22,7 +22,7 @@ export const Cart = Suspended((_: Propless) => {
   const [_width, height] = useWindowSize();
   const [open, setOpen] = useState(false);
   const { cartItems, cartTotal, elementsLoading, loadStripeCheckout } =
-    useContext(CheckoutContext);
+    use(CheckoutContext);
 
   const openCart = useCallback(() => {
     setOpen(true);

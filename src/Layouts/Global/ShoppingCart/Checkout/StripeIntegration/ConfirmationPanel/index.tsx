@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment, use } from "react";
 import { Closer } from "Components/Closer";
 import { CartItem } from "Layouts/Global/CartItem";
 import { CheckoutContext } from "../../Context";
@@ -7,7 +7,7 @@ import "./styles.scss";
 
 export const ConfirmationPanel = (props: PanelProps) => {
   const { email, toggle, orderId, cartItems, cartTotal, shippingAddress } =
-    useContext(CheckoutContext);
+    use(CheckoutContext);
   return (
     <Panel {...props} className="confirm">
       <Closer onClick={toggle.close} />
