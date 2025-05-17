@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { Fragment, memo, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { Group, Vector3 } from "three";
 import { OrbitControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
@@ -8,7 +8,7 @@ import { useWindowSize } from "Hooks/useWindowSize";
 import { Propless } from "Types/React";
 import { Staging } from "./Staging";
 
-export const Scene = memo(function Scene(_: Propless) {
+export const Scene = (_: Propless) => {
   const lerp = useRef(0);
   const { camera } = useThree();
   const [width] = useWindowSize();
@@ -22,6 +22,7 @@ export const Scene = memo(function Scene(_: Propless) {
     if (!initialCameraPosition) {
       return;
     }
+
     const TL = gsap.timeline();
     TL.to(camera.position, {
       x: initialCameraPosition.x + 1.75,
@@ -67,4 +68,4 @@ export const Scene = memo(function Scene(_: Propless) {
       </Staging>
     </Fragment>
   );
-});
+};
