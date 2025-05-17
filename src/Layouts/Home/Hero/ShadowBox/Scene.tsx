@@ -61,7 +61,7 @@ export const Scene = (_: Propless) => {
 
   return (
     <Fragment>
-      <OrbitControls enablePan enableRotate enableZoom={false} />
+      <OrbitControls enableRotate enablePan={false} enableZoom={false} />
       <Staging>
         <Art ref={model} />
       </Staging>
