@@ -15,7 +15,7 @@
     border-radius: 0.5em;
     max-width: 1000px;
     @include Variables.center;
-    background-color: rgba(#fff, 0.65);
+    background-color: rgba(#fff, 0.85);
     backdrop-filter: blur(5px);
     &>div {
       height: 100%;
