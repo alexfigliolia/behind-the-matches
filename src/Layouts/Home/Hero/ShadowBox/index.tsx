@@ -10,6 +10,7 @@ export const ShadowBox = memo(function ShadowBox(_: Propless) {
       shadows
       gl={{
         stencil: false,
+        precision: "highp",
         powerPreference: "high-performance",
       }}
       camera={{
