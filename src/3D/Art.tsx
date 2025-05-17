@@ -15,6 +15,7 @@ export const Art = Suspended(
           // @ts-ignore
           geometry={nodes.Babbo.geometry}
           material={materials["Material.006"]}
+          position={[0.01, 0, 0]}
         />
         <mesh
           castShadow
@@ -22,6 +23,7 @@ export const Art = Suspended(
           // @ts-ignore
           geometry={nodes.Via_Carota.geometry}
           material={materials["Material.007"]}
+          position={[0.013, 0, 0]}
         />
         <mesh
           castShadow
@@ -57,6 +59,7 @@ export const Art = Suspended(
           // @ts-ignore
           geometry={nodes.Felice.geometry}
           material={materials["Material.012"]}
+          position={[0.014, 0, 0]}
         />
         <mesh
           castShadow
@@ -78,6 +81,7 @@ export const Art = Suspended(
           // @ts-ignore
           geometry={nodes.Cipriani.geometry}
           material={materials["Material.015"]}
+          position={[0.005, 0, 0]}
         />
         <mesh
           castShadow
@@ -125,21 +129,21 @@ export const Art = Suspended(
           castShadow
           receiveShadow
           // @ts-ignore
-          geometry={nodes.Plane.geometry}
+          geometry={nodes.Bar_Pitti.geometry}
           material={materials["Material.022"]}
         />
         <mesh
           castShadow
           receiveShadow
           // @ts-ignore
-          geometry={nodes.Plane_1.geometry}
+          geometry={nodes.Plane.geometry}
           material={materials["Material.001"]}
         />
         <mesh
           castShadow
           receiveShadow
           // @ts-ignore
-          geometry={nodes.Plane_2.geometry}
+          geometry={nodes.Plane_1.geometry}
           material={materials["Material.002"]}
         />
         <mesh

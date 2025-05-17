@@ -8,11 +8,6 @@ export const ShadowBox = memo(function ShadowBox(_: Propless) {
   return (
     <Canvas
       shadows
-      gl={{
-        stencil: false,
-        precision: "highp",
-        powerPreference: "high-performance",
-      }}
       camera={{
         fov: 25,
         position: [-0.4, 0, 9],
