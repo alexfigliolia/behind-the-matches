@@ -3,12 +3,14 @@ import {
   Bounds,
   Center,
   ContactShadows,
+  Environment,
   OnCenterCallbackProps,
   useBounds,
 } from "@react-three/drei";
 import { OptionalChildren } from "Types/React";
 
-const BASE_SPOT_LIGHT_POSITION = [1, 2.15, 1] as const;
+const BASE_SPOT_LIGHT_POSITION = [0.5, 1.75, 1] as const;
+const BASE_POINT_LIGHT_POSITION = [-2, -0.5, -2] as const;
 
 export function Staging({ children }: OptionalChildren) {
   const [{ radius, height }, set] = useState({
@@ -20,6 +22,16 @@ export function Staging({ children }: OptionalChildren) {
     const { height, boundingSphere } = props;
     set({ radius: boundingSphere.radius, height });
   }, []);
+
+  const pointLightPosition = useMemo(
+    () =>
+      [
+        BASE_POINT_LIGHT_POSITION[0] * radius,
+        BASE_POINT_LIGHT_POSITION[1] * radius,
+        BASE_POINT_LIGHT_POSITION[2] * radius,
+      ] as const,
+    [radius],
+  );
 
   const spotLightPosition = useMemo(
     () =>
@@ -33,16 +45,17 @@ export function Staging({ children }: OptionalChildren) {
 
   return (
     <Fragment>
-      <ambientLight intensity={1.5} />
+      <ambientLight intensity={1} />
       <spotLight
         castShadow
         penumbra={1}
         position={spotLightPosition}
-        intensity={7.5}
+        intensity={6}
         shadow-bias={-0.0001}
         shadow-normalBias={0}
         shadow-mapSize={1024}
       />
+      <pointLight position={pointLightPosition} intensity={3} />
       <Bounds fit clip margin={1} observe>
         <Refit radius={radius} />
         <Center position={[0, 0, 0]} onCentered={onCentered}>
@@ -52,6 +65,7 @@ export function Staging({ children }: OptionalChildren) {
       <group position={[0, -height / 2, 0]}>
         <ContactShadows scale={radius * 4} far={radius} blur={2} />
       </group>
+      <Environment preset="city" />
     </Fragment>
   );
 }

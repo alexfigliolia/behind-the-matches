@@ -34,7 +34,8 @@
         width: calc(33.33333% - 0.6666em);
       }
       @media (min-width: 957px) {
-        width: calc(25% - 1.15em);
+        width: calc(33.33333% - 1em);
+        padding: 0.5em;
       }
       &>img {
         height: 100%;
