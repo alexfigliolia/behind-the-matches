@@ -11,8 +11,8 @@ import { Suspended } from "HOCs/Suspended";
 import { useModalToggle } from "Hooks/useModalToggle";
 import { useReplaceSearchParams } from "Hooks/useReplaceSearchParams";
 import { useWindowSize } from "Hooks/useWindowSize";
+import { CartItem } from "Layouts/Global/CartItem";
 import { Propless } from "Types/React";
-import { CartItem } from "../CartItem";
 import { CheckoutContext } from "../Context";
 import "./styles.scss";
 

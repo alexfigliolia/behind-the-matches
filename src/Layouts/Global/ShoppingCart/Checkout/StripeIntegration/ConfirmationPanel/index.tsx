@@ -1,6 +1,6 @@
 import { Fragment, useContext } from "react";
 import { Closer } from "Components/Closer";
-import { CartItem } from "../../CartItem";
+import { CartItem } from "Layouts/Global/CartItem";
 import { CheckoutContext } from "../../Context";
 import { Panel, PanelProps } from "../Panel";
 import "./styles.scss";

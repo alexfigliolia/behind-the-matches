@@ -9,8 +9,8 @@ import { type StripeAddressElementChangeEvent } from "@stripe/stripe-js";
 import { Input } from "Components/Input";
 import { Propless } from "Types/React";
 import { CheckoutContext } from "../../Context";
-import { useSubmitPayment } from "../../useSubmitPayment";
 import { Footer } from "./Footer";
+import { useSubmitPayment } from "./useSubmitPayment";
 
 export const Form = (_: Propless) => {
   const checkout = useCheckout();

@@ -9,7 +9,7 @@ import { CheckoutPanel } from "./CheckoutPanel";
 import { ConfirmationPanel } from "./ConfirmationPanel";
 import "./styles.scss";
 
-export const Checkout = Suspended((_: Propless) => {
+export const StripeIntegration = Suspended((_: Propless) => {
   const [heights, setHeights] = useState<number[]>([]);
   const { open, toggle, confirmation } = use(CheckoutContext);
   const classes = useClassNames("checkout-sheet", {

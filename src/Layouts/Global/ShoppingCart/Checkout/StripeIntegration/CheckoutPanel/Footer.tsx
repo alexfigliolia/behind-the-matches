@@ -2,7 +2,7 @@
 import { Fragment, use, useMemo } from "react";
 import { Button } from "Components/Button";
 import { ModalFormFooter } from "Components/ModalFormFooter";
-import { CheckoutContext } from "Layouts/Global/ShoppingCart/Context";
+import { CheckoutContext } from "Layouts/Global/ShoppingCart/Checkout/Context";
 import { Propless } from "Types/React";
 import "./styles.scss";
 

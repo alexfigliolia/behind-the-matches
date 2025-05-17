@@ -1,6 +1,6 @@
 import { FormEvent, use, useCallback } from "react";
 import { useCheckout } from "@stripe/react-stripe-js";
-import { CheckoutContext } from "./Context";
+import { CheckoutContext } from "../../Context";
 
 export const useSubmitPayment = () => {
   const { confirm } = useCheckout();
