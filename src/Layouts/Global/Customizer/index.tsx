@@ -22,7 +22,7 @@ export const Customizer = Suspended((_: Propless) => {
   const replace = useReplaceSearchParams();
   const [open, setOpen] = useState(false);
 
-  const onSuccess = useCallback(() => {
+  const clearForm = useCallback(() => {
     form?.current?.clear?.();
   }, []);
 
@@ -31,7 +31,7 @@ export const Customizer = Suspended((_: Propless) => {
     resetState,
     setState: _setState,
     ...status
-  } = useNetlifyForm(onSuccess);
+  } = useNetlifyForm(clearForm);
 
   const openSheet = useCallback(() => {
     setOpen(true);
@@ -41,10 +41,10 @@ export const Customizer = Suspended((_: Propless) => {
     setOpen(false);
     resetState();
     setTimeout(() => {
-      onSuccess();
+      clearForm();
       replace(p => p.delete("customizer"));
     }, 400);
-  }, [replace, onSuccess, resetState]);
+  }, [replace, clearForm, resetState]);
 
   const toggle = useModalToggle(openSheet, close);
 

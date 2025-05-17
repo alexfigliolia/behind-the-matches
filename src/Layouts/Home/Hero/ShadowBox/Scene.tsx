@@ -22,7 +22,6 @@ export const Scene = (_: Propless) => {
     if (!initialCameraPosition) {
       return;
     }
-
     const TL = gsap.timeline();
     TL.to(camera.position, {
       x: initialCameraPosition.x + 1.75,

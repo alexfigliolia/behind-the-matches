@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef } from "react";
+import React, { ForwardedRef, forwardRef, useMemo } from "react";
 import { Group } from "three";
 import { useGLTF } from "@react-three/drei";
 import { Suspended } from "HOCs/Suspended";
@@ -7,8 +7,9 @@ import { Propless } from "Types/React";
 export const Art = Suspended(
   forwardRef(function Art(_: Propless, ref: ForwardedRef<Group>) {
     const { nodes, materials } = useGLTF("/art.glb");
+    const rotation = useMemo(() => [0, -1.3, 0.25] as const, []);
     return (
-      <group ref={ref} dispose={null} rotation={[0, -1.3, 0.25]}>
+      <group ref={ref} dispose={null} rotation={rotation}>
         <mesh
           castShadow
           receiveShadow
