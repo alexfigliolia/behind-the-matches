@@ -4,9 +4,9 @@ import { useClassNames } from "@figliolia/classnames";
 import { Navigation } from "Components/Navigation";
 import { useModalToggle } from "Hooks/useModalToggle";
 import { OptionalChildren } from "Types/React";
-import { Logo } from "../Logo";
 import { MobileMenu } from "../MobileMenu";
 import { Burger } from "./Burger";
+import { Logo } from "./Logo";
 import { Socials } from "./Socials";
 import "./styles.scss";
 
@@ -31,7 +31,7 @@ export const Header = ({ children }: OptionalChildren) => {
       <header className={classes}>
         <div>
           <div>
-            <Logo />
+            <Logo closeMenu={closeMenu} />
             <div>
               <Navigation>
                 <Socials />
