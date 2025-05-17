@@ -8,9 +8,7 @@ import {
 } from "@react-three/drei";
 import { OptionalChildren } from "Types/React";
 
-const INTENSITY = 5;
-const BASE_SPOT_LIGHT_POSITION = [1, 2, 1] as const;
-const BASE_POINT_LIGHT_POSITION = [-2, -0.5, -2] as const;
+const BASE_SPOT_LIGHT_POSITION = [1, 2.15, 1] as const;
 
 export function Staging({ children }: OptionalChildren) {
   const [{ radius, height }, set] = useState({
@@ -22,16 +20,6 @@ export function Staging({ children }: OptionalChildren) {
     const { height, boundingSphere } = props;
     set({ radius: boundingSphere.radius, height });
   }, []);
-
-  const pointLightPosition = useMemo(
-    () =>
-      [
-        BASE_POINT_LIGHT_POSITION[0] * radius,
-        BASE_POINT_LIGHT_POSITION[1] * radius,
-        BASE_POINT_LIGHT_POSITION[2] * radius,
-      ] as const,
-    [radius],
-  );
 
   const spotLightPosition = useMemo(
     () =>
@@ -45,17 +33,16 @@ export function Staging({ children }: OptionalChildren) {
 
   return (
     <Fragment>
-      <ambientLight intensity={INTENSITY / 3} />
+      <ambientLight intensity={1.5} />
       <spotLight
         castShadow
         penumbra={1}
         position={spotLightPosition}
-        intensity={INTENSITY * 2}
+        intensity={7.5}
         shadow-bias={-0.0001}
         shadow-normalBias={0}
         shadow-mapSize={1024}
       />
-      <pointLight position={pointLightPosition} intensity={INTENSITY} />
       <Bounds fit clip margin={1} observe>
         <Refit radius={radius} />
         <Center position={[0, 0, 0]} onCentered={onCentered}>

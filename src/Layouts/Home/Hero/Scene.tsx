@@ -62,7 +62,6 @@ export const Scene = memo(function Scene(_: Propless) {
   return (
     <Fragment>
       <OrbitControls enablePan enableRotate enableZoom={false} />
-      <ambientLight intensity={0.5} />
       <Staging>
         <Art ref={model} />
       </Staging>
