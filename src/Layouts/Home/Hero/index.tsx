@@ -12,7 +12,13 @@ export const Hero = (_: Propless) => {
   return (
     <Section className="hero">
       <div className="canvas">
-        <Canvas shadows camera={{ fov: 25, position: [-0.4, 0, 9], zoom: 0.5 }}>
+        <Canvas
+          shadows
+          camera={{
+            fov: 25,
+            position: [-0.4, 0, 9],
+            zoom: 0.5,
+          }}>
           <Scene />
         </Canvas>
       </div>
