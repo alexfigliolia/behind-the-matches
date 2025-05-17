@@ -65,7 +65,7 @@ export function Staging({ children }: OptionalChildren) {
       <group position={[0, -height / 2, 0]}>
         <ContactShadows scale={radius * 4} far={radius} blur={2} />
       </group>
-      <Environment preset="city" />
+      <Environment path="/" files="lighting.hdr" />
     </Fragment>
   );
 }
