@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "tsx ci/commands/Lint.ts",
     "test": "tsx ci/commands/Test.ts",
+    "optimize-model": "tsx devtools/optimize-model/CLI.ts",
     "create-package": "tsx devtools/create-package/CLI.ts"
   },
   "dependencies": {
@@ -28,11 +29,13 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "stripe": "^18.1.0",
-    "three": "^0.176.0"
+    "three": "^0.176.0",
+    "three-stdlib": "^2.36.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@figliolia/child-process": "^1.0.4",
+    "@gltf-transform/cli": "^4.1.3",
     "@next/bundle-analyzer": "^15.3.2",
     "@react-three/eslint-plugin": "^0.1.2",
     "@types/node": "^20",
