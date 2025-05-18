@@ -1,5 +1,5 @@
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
-import { Serwist } from "serwist";
+import { CacheFirst, ExpirationPlugin, Serwist } from "serwist";
 import { defaultCache } from "@serwist/next/worker";
 
 // This declares the value of `injectionPoint` to TypeScript.
@@ -19,7 +19,22 @@ const serwist = new Serwist({
   skipWaiting: true,
   clientsClaim: true,
   navigationPreload: true,
-  runtimeCaching: defaultCache,
+  runtimeCaching: [
+    ...defaultCache,
+    {
+      matcher: /\.(?:hdr|glb)$/i,
+      handler: new CacheFirst({
+        cacheName: "static-3d-assets",
+        plugins: [
+          new ExpirationPlugin({
+            maxEntries: 64,
+            maxAgeSeconds: 30 * 24 * 60 * 60,
+            maxAgeFrom: "last-used",
+          }),
+        ],
+      }),
+    },
+  ],
 });
 
 serwist.addEventListeners();
