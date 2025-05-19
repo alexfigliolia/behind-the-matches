@@ -55,15 +55,20 @@ export const ProductSheet = Suspended(({ product }: Props) => {
         ))}
       </Slider>
       <footer>
-        <h2>{selectedProduct?.name ?? ""}</h2>
-        <ProductPrice
-          price={
-            (selectedProduct?.default_price ?? {
-              unit_amount: 0,
-            }) as Stripe.Price
-          }
-        />
-        <div>
+        <div className="meta">
+          <h2>{selectedProduct?.name ?? ""}</h2>
+          {selectedProduct?.description && <p>{selectedProduct.description}</p>}
+          <div className="price">
+            <ProductPrice
+              price={
+                (selectedProduct?.default_price ?? {
+                  unit_amount: 0,
+                }) as Stripe.Price
+              }
+            />
+          </div>
+        </div>
+        <div className="actions">
           <Button text="Back" onClick={close} />
           <AddToCartButton productID={selectedProduct?.id as string} />
         </div>

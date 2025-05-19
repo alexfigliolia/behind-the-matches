@@ -16,6 +16,9 @@
     @media(min-width: 670px) {
       height: 400px;
     }
+     @media(min-width: 957px) {
+      height: min(400px, 50vh);
+    }
   }
   & .form {
     width: 90%;
