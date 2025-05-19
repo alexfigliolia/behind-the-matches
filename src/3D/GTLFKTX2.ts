@@ -6,6 +6,9 @@ export class GLTFKTX2 {
   private static readonly LOADER = new KTX2Loader().setTranscoderPath(
     `${this.THREE_PATH}/examples/jsm/libs/basis/`,
   );
+  public static isIOS =
+    typeof navigator !== undefined &&
+    /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   public static readonly extendGLTF = (loader: GLTFLoader) => {
     loader.setKTX2Loader(this.LOADER.detectSupport(new WebGLRenderer()));

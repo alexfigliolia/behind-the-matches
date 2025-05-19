@@ -3,16 +3,16 @@ import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { Group, Vector3 } from "three";
 import { OrbitControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Art } from "3D/Art";
+import { ShadowBoxModel } from "3D/ShadowBoxModel";
 import { useWindowSize } from "Hooks/useWindowSize";
 import { Propless } from "Types/React";
 import { Staging } from "./Staging";
 
 export const Scene = (_: Propless) => {
   const lerp = useRef(0);
-  const { camera } = useThree();
   const [width] = useWindowSize();
   const model = useRef<Group>(null);
+  const camera = useThree(three => three.camera);
   const [initialCameraPosition, setCameraPosition] = useState<
     Vector3 | undefined
   >(undefined);
@@ -63,7 +63,7 @@ export const Scene = (_: Propless) => {
     <Fragment>
       <OrbitControls enableRotate enablePan={false} enableZoom={false} />
       <Staging>
-        <Art ref={model} />
+        <ShadowBoxModel ref={model} />
       </Staging>
     </Fragment>
   );
