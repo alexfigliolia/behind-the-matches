@@ -98,7 +98,7 @@ export const Slider = forwardRef(function Slider(
     }
   }, [startAutoplay]);
 
-  const onScrollEnd = useDebounce(onScroll, 300);
+  const onScrollEnd = useDebounce(onScroll, 100);
 
   useEffect(() => {
     if (!autoplay || interval.current) {
