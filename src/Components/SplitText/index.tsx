@@ -2,31 +2,22 @@ import { useMemo } from "react";
 import { useClassNames } from "@figliolia/classnames";
 import "./styles.scss";
 
-export const SplitText = ({ text, className, Tag = "div" }: Props) => {
+export const SplitText = ({ text, className }: Props) => {
   const classes = useClassNames("split-text", className);
   const tokens = useMemo(() => text.split(""), [text]);
   return (
-    <Tag className={classes} aria-label={text}>
+    <div className={classes} aria-hidden>
       {tokens.map((char, i) => {
         if (char === " ") {
-          return (
-            <div aria-hidden key={i}>
-              &nbsp;
-            </div>
-          );
+          return <span key={i}>&nbsp;</span>;
         }
-        return (
-          <div aria-hidden key={i}>
-            {char}
-          </div>
-        );
+        return <span key={i}>{char}</span>;
       })}
-    </Tag>
+    </div>
   );
 };
 
 interface Props {
   text: string;
   className?: string;
-  Tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div";
 }

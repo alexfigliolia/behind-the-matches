@@ -1,7 +1,7 @@
 import { BoundedContent } from "Components/BoundedContent";
 import { CustomizeButton } from "Components/CustomizeButton";
-import { GalleryImages } from "Components/GalleryImages";
 import { Section } from "Components/Section";
+import { GalleryImages } from "Tools/GalleryImages";
 import { Propless } from "Types/React";
 import "./styles.scss";
 
@@ -14,7 +14,9 @@ export const Gallery = (_: Propless) => {
           our journey.
         </p>
         <div className="images">
-          <GalleryImages />
+          {GalleryImages.map((img, i) => (
+            <div key={i}>{img}</div>
+          ))}
         </div>
         <CustomizeButton />
       </BoundedContent>

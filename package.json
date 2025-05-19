@@ -13,7 +13,7 @@
     "create-package": "tsx devtools/create-package/CLI.ts"
   },
   "dependencies": {
-    "@figliolia/bottom-sheet": "^1.4.1",
+    "@figliolia/bottom-sheet": "^1.6.0",
     "@figliolia/classnames": "^1.0.1",
     "@figliolia/modal-stack": "^1.1.0",
     "@figliolia/react-hooks": "^1.3.0",

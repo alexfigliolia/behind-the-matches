@@ -18,7 +18,7 @@ const compat = new FlatCompat({
 });
 
 export default [
-  globalIgnores([".next", "tsconfig.tsbuildinfo"]),
+  globalIgnores([".next", "tsconfig.tsbuildinfo", "public"]),
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   eslintPluginPrettierRecommended,
   {

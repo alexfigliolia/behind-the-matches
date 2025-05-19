@@ -1,5 +1,5 @@
 "use client";
-import { use, useCallback, useMemo, useState } from "react";
+import { use, useCallback, useId, useMemo, useState } from "react";
 import { useClassNames } from "@figliolia/classnames";
 import { BottomSheet } from "Components/BottomSheet";
 import { Suspended } from "HOCs/Suspended";
@@ -10,6 +10,9 @@ import { ConfirmationPanel } from "./ConfirmationPanel";
 import "./styles.scss";
 
 export const StripeIntegration = Suspended((_: Propless) => {
+  const checkoutTitle = useId();
+  const confirmationTitle = useId();
+  const confirmationDescription = useId();
   const [heights, setHeights] = useState<number[]>([]);
   const { open, toggle, confirmation } = use(CheckoutContext);
   const classes = useClassNames("checkout-sheet", {
@@ -33,14 +36,33 @@ export const StripeIntegration = Suspended((_: Propless) => {
   const cacheCheckoutHeight = useMemo(() => cacheHeight(0), [cacheHeight]);
   const cacheConfirmationHeight = useMemo(() => cacheHeight(1), [cacheHeight]);
 
+  const ariaLabel = useMemo(
+    () => (confirmation ? confirmationTitle : checkoutTitle),
+    [confirmation, confirmationTitle, checkoutTitle],
+  );
+  const ariaDescription = useMemo(
+    () =>
+      confirmation ? undefined : "Fill out the form below to submit your order",
+    [confirmation],
+  );
+
   return (
-    <BottomSheet open={open} className={classes} close={toggle.close}>
+    <BottomSheet
+      open={open}
+      className={classes}
+      close={toggle.close}
+      aria-labelledby={ariaLabel}
+      aria-description={ariaDescription}
+      aria-describedby={confirmation ? confirmationDescription : undefined}>
       <div className="translatable" style={{ height, maxHeight: height }}>
         <CheckoutPanel
+          titleID={checkoutTitle}
           aria-hidden={confirmation}
           cacheHeight={cacheCheckoutHeight}
         />
         <ConfirmationPanel
+          titleID={confirmationTitle}
+          descriptionID={confirmationDescription}
           aria-hidden={!confirmation}
           cacheHeight={cacheConfirmationHeight}
         />

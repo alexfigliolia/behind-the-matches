@@ -1,6 +1,6 @@
 .split-text {
   display: flex;
-  &>div {
-    display: inline-block;
+  &>span {
+    display: block;
   }
 }

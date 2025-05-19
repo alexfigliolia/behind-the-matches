@@ -59,7 +59,7 @@
         overflow: hidden;
         @include Variables.center;
         &>.split-text {
-          &>div {
+          &>span {
             transition: translate 0.3s, opacity 0.3s;
             &:nth-of-type(1) {
               transition-delay: 0s;
@@ -76,7 +76,7 @@
           }
           &:last-of-type {
             position: absolute;
-            &>div {
+            &>span {
               opacity: 0;
               translate: 0 -100%;
             }
@@ -97,13 +97,13 @@
         }
       }
       &>.text > div > .split-text {
-        &>div {
+        &>span {
           opacity: 1;
         }
-        &:last-of-type > div {
+        &:last-of-type > span {
           translate: 0 0%;
         }
-        &:first-of-type > div {
+        &:first-of-type > span {
           translate: 0 100%;
         }
       }

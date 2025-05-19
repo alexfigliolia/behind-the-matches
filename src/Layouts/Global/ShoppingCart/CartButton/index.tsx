@@ -25,9 +25,9 @@ export const CartButton = Suspended((_: Propless) => {
     <button
       onClick={openCart}
       className="cart-button"
-      aria-label="Shopping Cart">
+      aria-label={`Shopping Cart - ${total} items`}>
       <ShoppingBag aria-hidden />
-      <div>{total}</div>
+      <span aria-hidden>{total}</span>
     </button>
   );
 });

@@ -1,6 +1,13 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import { BottomSheet } from "Components/BottomSheet";
 import { Button } from "Components/Button";
 import { Closer } from "Components/Closer";
@@ -16,6 +23,7 @@ import { Propless } from "Types/React";
 import "./styles.scss";
 
 export const BookAWorkShop = Suspended((_: Propless) => {
+  const title = useId();
   const form = useRef<FormCTRL>(null);
   const [open, setOpen] = useState(false);
 
@@ -53,9 +61,13 @@ export const BookAWorkShop = Suspended((_: Propless) => {
   }, [params, toggle]);
 
   return (
-    <BottomSheet open={open} close={toggle.close} className="book-a-workshop">
+    <BottomSheet
+      open={open}
+      close={toggle.close}
+      className="book-a-workshop"
+      aria-labelledby={title}>
       <Closer aria-label="Close Window" onClick={close} />
-      <h2>Book Your Event</h2>
+      <h2 id={title}>Book Your Event</h2>
       <Form ref={form} name="book-an-event" onSubmit={onSubmit}>
         <input type="hidden" name="form-name" value="book-an-event" />
         <Input required name="name" label="Name" type="text" />

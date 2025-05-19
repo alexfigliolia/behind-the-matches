@@ -21,11 +21,9 @@ export const CartItem = ({
   return (
     <li key={id} className="cart-item">
       <div className="display">
-        <Slider controls={false}>
+        <Slider aria-label={`Images of ${name}`} controls={false}>
           {images.map(img => (
-            <div key={img}>
-              <img src={img} alt={name} />
-            </div>
+            <img key={img} src={img} alt={name} />
           ))}
         </Slider>
         <div className="meta">

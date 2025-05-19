@@ -1,10 +1,13 @@
 "use client";
 import {
+  Children,
   ForwardedRef,
   forwardRef,
   useCallback,
   useEffect,
+  useId,
   useImperativeHandle,
+  useMemo,
   useRef,
 } from "react";
 import { useClassNames } from "@figliolia/classnames";
@@ -16,14 +19,22 @@ import { OptionalChildren } from "Types/React";
 import "./styles.scss";
 
 export const Slider = forwardRef(function Slider(
-  { className, children, controls = true, autoplay = false }: Props,
+  {
+    className,
+    children,
+    controls = true,
+    autoplay = false,
+    "aria-label": ariaLabel,
+  }: Props,
   ref: ForwardedRef<ISlider>,
 ) {
+  const ariaID = useId();
   const current = useRef(0);
   const enqueueAutoPlay = useRef(false);
   const container = useRef<HTMLDivElement>(null);
   const classes = useClassNames("slider", className);
   const interval = useRef<ReturnType<typeof setInterval> | null>(null);
+  const totalSlides = useMemo(() => Children.count(children), [children]);
 
   const clearTimer = useCallback(() => {
     if (interval.current) {
@@ -36,9 +47,8 @@ export const Slider = forwardRef(function Slider(
     if (!container.current) {
       return;
     }
-    const { children, clientWidth } = container.current;
-    const { length } = children;
-    if (current.current === length - 1) {
+    const { clientWidth } = container.current;
+    if (current.current === totalSlides - 1) {
       container.current.scrollTo({ left: 0, behavior: "smooth" });
     } else {
       container.current.scrollTo({
@@ -46,7 +56,7 @@ export const Slider = forwardRef(function Slider(
         behavior: "smooth",
       });
     }
-  }, []);
+  }, [totalSlides]);
 
   const next = useCallback(() => {
     slideNext();
@@ -58,11 +68,10 @@ export const Slider = forwardRef(function Slider(
     if (!container.current) {
       return;
     }
-    const { children, clientWidth } = container.current;
-    const { length } = children;
+    const { clientWidth } = container.current;
     if (current.current === 0) {
       container.current.scrollTo({
-        left: clientWidth * length,
+        left: clientWidth * totalSlides - 1,
         behavior: "smooth",
       });
     } else {
@@ -73,7 +82,7 @@ export const Slider = forwardRef(function Slider(
     }
     clearTimer();
     enqueueAutoPlay.current = true;
-  }, [clearTimer]);
+  }, [clearTimer, totalSlides]);
 
   const startAutoplay = useCallback(() => {
     if (interval.current) {
@@ -89,14 +98,12 @@ export const Slider = forwardRef(function Slider(
       return;
     }
     const { scrollWidth, scrollLeft } = container.current;
-    current.current = Math.round(
-      (scrollLeft * container.current.children.length) / scrollWidth,
-    );
+    current.current = Math.round((scrollLeft * totalSlides) / scrollWidth);
     if (enqueueAutoPlay.current) {
       enqueueAutoPlay.current = false;
       startAutoplay();
     }
-  }, [startAutoplay]);
+  }, [startAutoplay, totalSlides]);
 
   const onScrollEnd = useDebounce(onScroll, 100);
 
@@ -109,16 +116,36 @@ export const Slider = forwardRef(function Slider(
   }, [autoplay, startAutoplay, clearTimer]);
 
   return (
-    <div className={classes}>
-      <div className="scroll-view" onScroll={onScrollEnd} ref={container}>
-        {children}
+    <div
+      role="region"
+      className={classes}
+      aria-label={ariaLabel}
+      aria-roledescription="carousel">
+      <div
+        id={ariaID}
+        tabIndex={0}
+        className="scroll-view"
+        onScroll={onScrollEnd}
+        ref={container}
+        aria-live={autoplay ? "off" : "polite"}>
+        {Children.map(children, (child, i) => (
+          <div
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${totalSlides}`}>
+            {child}
+          </div>
+        ))}
       </div>
       {controls && (
         <div className="controls">
-          <button aria-label="previous" onClick={previous}>
+          <button
+            aria-label="previous slide"
+            onClick={previous}
+            aria-controls={ariaID}>
             <ChevronLeft aria-hidden />
           </button>
-          <button aria-label="next" onClick={next}>
+          <button aria-label="next slide" onClick={next} aria-controls={ariaID}>
             <ChevronRight aria-hidden />
           </button>
         </div>
@@ -131,6 +158,7 @@ interface Props extends OptionalChildren {
   className?: string;
   autoplay?: boolean;
   controls?: boolean;
+  "aria-label": string;
 }
 
 interface ISlider {

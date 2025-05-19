@@ -20,7 +20,7 @@
       fill: var(--red);
       filter: drop-shadow(0em 0em 0.2em rgba(from var(--red) r g b / 80%));
     }
-    &>div {
+    &>span {
       color: var(--red);
     }
   }
@@ -35,7 +35,7 @@
     animation: showContent 1s 0.5s forwards;
     filter: drop-shadow(0em 0em 0.2em rgba(from var(--red) r g b / 0%));
   } 
-  &>div {
+  &>span {
     top: calc(var(--size) / 16);
     left: 0;
     color: #000;

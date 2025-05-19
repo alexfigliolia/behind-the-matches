@@ -5,15 +5,19 @@ import { CheckoutContext } from "../../Context";
 import { Panel, PanelProps } from "../Panel";
 import "./styles.scss";
 
-export const ConfirmationPanel = (props: PanelProps) => {
+export const ConfirmationPanel = ({
+  titleID,
+  descriptionID,
+  ...props
+}: Props) => {
   const { email, toggle, orderId, cartItems, cartTotal, shippingAddress } =
     use(CheckoutContext);
   return (
     <Panel {...props} className="confirm">
-      <Closer onClick={toggle.close} />
+      <Closer onClick={toggle.close} aria-label="Close Window" />
       <div className="padded">
-        <h2>Success!</h2>
-        <p>Your order is on its way!</p>
+        <h2 id={titleID}>Success!</h2>
+        <p id={descriptionID}>Your order is on its way!</p>
         <div className="order-number">
           <div>Order:&nbsp;&nbsp;{orderId}</div>
         </div>
@@ -75,3 +79,8 @@ export const ConfirmationPanel = (props: PanelProps) => {
     </Panel>
   );
 };
+
+interface Props extends PanelProps {
+  titleID: string;
+  descriptionID?: string;
+}

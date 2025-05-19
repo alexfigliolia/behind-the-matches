@@ -28,11 +28,14 @@ export const ModalFormFooter = ({
     <ModalFooter className={classes} actions={actions}>
       <div className="status">
         <div>
-          <LoadingText aria-hidden={!loading}>
+          <LoadingText
+            aria-hidden={!loading}
+            role={loading ? "alert" : undefined}
+            aria-live="polite">
             {loadingText ?? "Loading"}
           </LoadingText>
           <div className="error-text" aria-hidden={!error}>
-            <p>
+            <p role={!!error ? "alert" : undefined}>
               <Alert aria-hidden />
               {typeof error === "string"
                 ? error
@@ -46,7 +49,7 @@ export const ModalFormFooter = ({
             />
           </div>
           <div className="success-text" aria-hidden={!success}>
-            <p>
+            <p role={success ? "alert" : undefined} aria-live="polite">
               <Check aria-hidden />
               {successText ?? "Success"}
             </p>

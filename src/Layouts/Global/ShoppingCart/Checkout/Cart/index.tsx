@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { Fragment, use, useCallback, useEffect, useState } from "react";
+import { Fragment, use, useCallback, useEffect, useId, useState } from "react";
 import { useClassNames } from "@figliolia/classnames";
 import { Button } from "Components/Button";
 import { Closer } from "Components/Closer";
@@ -17,6 +17,7 @@ import { CheckoutContext } from "../Context";
 import "./styles.scss";
 
 export const Cart = Suspended((_: Propless) => {
+  const titleID = useId();
   const params = useSearchParams();
   const replace = useReplaceSearchParams();
   const [_width, height] = useWindowSize();
@@ -54,11 +55,14 @@ export const Cart = Suspended((_: Propless) => {
         role="dialog"
         aria-hidden={!open}
         className={classes}
+        aria-labelledby={titleID}
         style={{ minHeight: height }}>
         <div className="content">
           <div className="title">
             <Closer aria-label="Close Shopping Cart" onClick={toggle.close} />
-            <SplitText Tag="h2" text="Your Cart" />
+            <h2 id={titleID} aria-label="Your Cart">
+              <SplitText text="Your Cart" />
+            </h2>
           </div>
           {!!cartItems.length ? (
             <ul>

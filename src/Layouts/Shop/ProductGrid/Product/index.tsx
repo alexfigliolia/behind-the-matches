@@ -29,11 +29,9 @@ export const Product = Suspended(
 
     return (
       <article className={classes}>
-        <Slider controls={images.length > 1}>
+        <Slider controls={images.length > 1} aria-label={`Images of ${name}`}>
           {images.map(img => (
-            <div key={img}>
-              <img src={img} alt={name} />
-            </div>
+            <img key={img} src={img} alt={name} />
           ))}
         </Slider>
         <div className="meta">

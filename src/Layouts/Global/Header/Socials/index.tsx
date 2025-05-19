@@ -28,11 +28,11 @@ export const Socials = (_: Propless) => {
   return (
     <button
       ref={node}
-      aria-expanded={open}
       onFocus={onFocus}
+      className={classes}
+      aria-expanded={open}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={classes}
       aria-label="View Social Links">
       <ShareLinks aria-hidden />
       <div aria-hidden={!open}>

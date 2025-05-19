@@ -15,7 +15,7 @@ export const ProductGrid = ({ products, min = 3 }: Props) => {
     [products.length, min],
   );
   return (
-    <div className="product-grid">
+    <section className="product-grid">
       {products.map(product => {
         const price = product.default_price as Stripe.Price;
         if (!price.unit_amount) {
@@ -33,7 +33,7 @@ export const ProductGrid = ({ products, min = 3 }: Props) => {
           />
         );
       })}
-    </div>
+    </section>
   );
 };
 

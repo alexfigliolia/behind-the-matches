@@ -16,13 +16,17 @@ export const Quantity = ({ quantity, productID }: Props) => {
 
   return (
     <div className="quantity">
-      <button onClick={decrease}>
+      <button
+        onClick={decrease}
+        aria-label="reduce quantity of this item by one">
         <ChevronDown aria-hidden />
       </button>
       <div>
         <div>{quantity}</div>
       </div>
-      <button onClick={increase}>
+      <button
+        onClick={increase}
+        aria-label="increase quantity of this item by one">
         <ChevronUp aria-hidden />
       </button>
     </div>

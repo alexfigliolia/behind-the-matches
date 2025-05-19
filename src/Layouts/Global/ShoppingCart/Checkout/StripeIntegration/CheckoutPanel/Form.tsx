@@ -60,7 +60,11 @@ export const Form = (_: Propless) => {
             label="Your Email"
             name="email"
             onBlur={onBlurEmail}>
-            {emailError && <div className="input-error">{emailError}</div>}
+            {emailError && (
+              <div role="alert" className="input-error">
+                {emailError}
+              </div>
+            )}
           </Input>
           <h3>Payment Details</h3>
           <PaymentElement

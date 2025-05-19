@@ -3,6 +3,7 @@ import {
   ForwardedRef,
   forwardRef,
   useCallback,
+  useId,
   useImperativeHandle,
   useState,
 } from "react";
@@ -19,6 +20,7 @@ export const Notification = forwardRef(function Notification(
   { onHide }: Props,
   ref: ForwardedRef<ModalToggle>,
 ) {
+  const message = useId();
   const [visible, setVisible] = useState(false);
 
   const show = useCallback(() => {
@@ -37,11 +39,11 @@ export const Notification = forwardRef(function Notification(
   const classes = useClassNames("notification", { visible });
   return (
     <Portal>
-      <div className={classes}>
+      <div className={classes} role="dialog" aria-describedby={message}>
         <div>
-          <Closer onClick={toggle.close} />
-          <Check />
-          <p>
+          <Closer onClick={toggle.close} aria-label="Dismiss Notification" />
+          <Check aria-hidden />
+          <p id={message} role="alert" aria-live="polite">
             <strong>Success!</strong> Someone from our team will reach out to
             you soon.
           </p>

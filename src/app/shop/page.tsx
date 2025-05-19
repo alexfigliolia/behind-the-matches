@@ -43,7 +43,7 @@ export default async function Shop({
           <ProductGrid products={products.data} />
           <CustomizeYourOwn />
         </BoundedContent>
-        <div className="reviews">
+        <section className="reviews">
           <ProductReview
             image="/customer-piece-1.jpg"
             review="“The piece looks amazing — it went up on the wall today and couldn’t be more perfect in the space. Thanks again for your patience and attention to detail, I’m so happy with how it turned out. I’ll definitely be in touch about additional pieces in the future!”"
@@ -53,7 +53,7 @@ export default async function Shop({
             image="/customer-piece-2.png"
             review="“She loved it. Huge success!!!!”"
           />
-        </div>
+        </section>
       </Section>
       <ProductSheet product={selectedProduct} />
     </main>

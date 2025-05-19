@@ -27,25 +27,10 @@ export default function WorkShops(_: Propless) {
                 text="Book an Event"
               />
             </div>
-            <Slider>
-              <div>
-                <img
-                  src="/workshop-1.png"
-                  alt="collegues making art together"
-                />
-              </div>
-              <div>
-                <img
-                  src="/workshop-2.png"
-                  alt="collegues making art together"
-                />
-              </div>
-              <div>
-                <img
-                  src="/workshop-3.png"
-                  alt="collegues making art together"
-                />
-              </div>
+            <Slider aria-label="Photos from previous workshops">
+              <img src="/workshop-1.png" alt="collegues making art together" />
+              <img src="/workshop-2.png" alt="collegues making art together" />
+              <img src="/workshop-3.png" alt="collegues making art together" />
             </Slider>
           </div>
         </Section>

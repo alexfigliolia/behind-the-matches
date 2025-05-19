@@ -42,7 +42,7 @@
           }
           &>.split-text {
             overflow: hidden;
-            &> div {
+            &> span {
               translate: 0 100%;
               @for $i from 1 through 13 {
                 &:nth-of-type(#{$i}) {
@@ -71,6 +71,10 @@
         translate: 0 100%;
         opacity: 0;
         transition: all 0.4s 0s;
+        &>svg {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }
@@ -86,7 +90,7 @@
               opacity: 1;
               transition: scale 0.4s, opacity 0.3s 0.6s;
             }
-            &> .split-text > div {
+            &> .split-text > span {
               translate: 0 0%;
               @for $i from 1 through 13 {
                 &:nth-of-type(#{$i}) {

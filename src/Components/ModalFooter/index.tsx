@@ -10,12 +10,12 @@ export const ModalFooter = ({
 }: ModalFooterProps) => {
   const classes = useClassNames("modal-footer", className);
   return (
-    <footer className={classes}>
+    <div className={classes}>
       <div>
         <div className="actions">{actions}</div>
         {children}
       </div>
-    </footer>
+    </div>
   );
 };
 

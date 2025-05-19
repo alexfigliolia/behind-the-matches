@@ -10,7 +10,7 @@ import "./styles.scss";
 
 const stripePromise = loadStripe(Stripe.publicAPIKey);
 
-export const CheckoutPanel = (props: PanelProps) => {
+export const CheckoutPanel = ({ titleID, ...props }: Props) => {
   const cartItems = useShoppingCart();
   const { checkingOut } = use(CheckoutContext);
 
@@ -21,7 +21,7 @@ export const CheckoutPanel = (props: PanelProps) => {
   return (
     <Panel {...props} className="checkout">
       <div className="padded">
-        <h2>Checkout</h2>
+        <h2 id={titleID}>Checkout</h2>
       </div>
       {checkingOut && (
         <CheckoutProvider
@@ -56,3 +56,7 @@ export const CheckoutPanel = (props: PanelProps) => {
     </Panel>
   );
 };
+
+interface Props extends PanelProps {
+  titleID: string;
+}

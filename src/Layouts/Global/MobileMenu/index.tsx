@@ -17,7 +17,7 @@ export const MobileMenu = ({ open, close }: Props) => {
         className={classes}
         style={{ "--height": `${height}px` }}>
         <div>
-          <Navigation onNavigate={close} />
+          <Navigation split onNavigate={close} />
           <div className="socials">
             <SocialMediaLinks />
           </div>

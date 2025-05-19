@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useId, useState } from "react";
 import Stripe from "stripe";
 import { AddToCartButton } from "Components/AddToCartButton";
 import { BottomSheet } from "Components/BottomSheet";
@@ -12,6 +12,9 @@ import { useReplaceSearchParams } from "Hooks/useReplaceSearchParams";
 import "./styles.scss";
 
 export const ProductSheet = Suspended(({ product }: Props) => {
+  const title = useId();
+  const priceID = useId();
+  const description = useId();
   const [open, setOpen] = useState(false);
   const replace = useReplaceSearchParams();
   const [selectedProduct, setSelectedProduct] = useState(product);
@@ -46,20 +49,28 @@ export const ProductSheet = Suspended(({ product }: Props) => {
   }, [product, selectedProduct]);
 
   return (
-    <BottomSheet open={open} close={toggle.close} className="product-sheet">
-      <Slider controls={(selectedProduct?.images?.length ?? 0) > 1}>
+    <BottomSheet
+      open={open}
+      close={toggle.close}
+      className="product-sheet"
+      aria-labelledby={title}
+      aria-describedby={selectedProduct?.description ? description : priceID}>
+      <Slider
+        controls={(selectedProduct?.images?.length ?? 0) > 1}
+        aria-label={`Images of "${selectedProduct?.name ?? "this artwork"}"`}>
         {(selectedProduct?.images ?? []).map(img => (
-          <div key={img}>
-            <img src={img} alt={selectedProduct?.name ?? ""} />
-          </div>
+          <img key={img} src={img} alt={selectedProduct?.name ?? ""} />
         ))}
       </Slider>
-      <footer>
+      <div className="product-sheet-footer">
         <div className="meta">
-          <h2>{selectedProduct?.name ?? ""}</h2>
-          {selectedProduct?.description && <p>{selectedProduct.description}</p>}
+          <h2 id={title}>{selectedProduct?.name ?? ""}</h2>
+          {selectedProduct?.description && (
+            <p id={description}>{selectedProduct.description}</p>
+          )}
           <div className="price">
             <ProductPrice
+              id={priceID}
               price={
                 (selectedProduct?.default_price ?? {
                   unit_amount: 0,
@@ -72,7 +83,7 @@ export const ProductSheet = Suspended(({ product }: Props) => {
           <Button text="Back" onClick={close} />
           <AddToCartButton productID={selectedProduct?.id as string} />
         </div>
-      </footer>
+      </div>
     </BottomSheet>
   );
 });
