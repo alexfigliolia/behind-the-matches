@@ -1,14 +1,15 @@
 import gsap from "gsap";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { Group, Vector3 } from "three";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Preload } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { ShadowBoxModel } from "3D/ShadowBoxModel";
+import { Suspended } from "HOCs/Suspended";
 import { useWindowSize } from "Hooks/useWindowSize";
 import { Propless } from "Types/React";
 import { Staging } from "./Staging";
 
-export const Scene = (_: Propless) => {
+export const Scene = Suspended((_: Propless) => {
   const lerp = useRef(0);
   const [width] = useWindowSize();
   const model = useRef<Group>(null);
@@ -65,6 +66,7 @@ export const Scene = (_: Propless) => {
       <Staging>
         <ShadowBoxModel ref={model} />
       </Staging>
+      <Preload all />
     </Fragment>
   );
-};
+});

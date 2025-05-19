@@ -11,8 +11,8 @@ export const ShadowBox = memo(
         shadows
         camera={{
           fov: 25,
-          position: [-0.4, 0, 9],
           zoom: 0.5,
+          position: [-0.4, 0, 9],
         }}>
         <Scene />
       </Canvas>
