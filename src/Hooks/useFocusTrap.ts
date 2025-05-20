@@ -80,6 +80,4 @@ export const useFocusTrap = <T extends HTMLElement>(
       document.removeEventListener("click", onClick);
     };
   }, [active, onKeyDown, onKeyUp, onClick]);
-
-  return container;
 };
