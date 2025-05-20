@@ -34,10 +34,13 @@ export const Footer = (_: Propless) => {
           <Button
             type="button"
             text="Cancel"
-            disabled={hidePrimaryActions}
             onClick={toggle.close}
+            disabled={hidePrimaryActions || showPaymentStatus}
           />
-          <Button text="Submit" disabled={hidePrimaryActions} />
+          <Button
+            text="Submit"
+            disabled={hidePrimaryActions || showPaymentStatus}
+          />
         </Fragment>
       }
     />

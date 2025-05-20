@@ -5,6 +5,7 @@ import {
   useCallback,
   useEffect,
   useId,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -60,6 +61,11 @@ export const BookAWorkShop = Suspended((_: Propless) => {
     }
   }, [params, toggle]);
 
+  const showStatus = useMemo(
+    () => status.success || !!status.error || status.loading,
+    [status],
+  );
+
   return (
     <BottomSheet
       open={open}
@@ -76,14 +82,19 @@ export const BookAWorkShop = Suspended((_: Propless) => {
         <TextArea required name="details" label="Message" />
         <ModalFormFooter
           {...status}
+          showStatus={showStatus}
           onClose={toggle.close}
           resetState={resetState}
           successText="Someone from our team will reach out to you shortly"
-          showStatus={status.success || !!status.error || status.loading}
           actions={
             <Fragment>
-              <Button type="button" text="Cancel" onClick={toggle.close} />
-              <Button text="Submit" />
+              <Button
+                type="button"
+                text="Cancel"
+                onClick={toggle.close}
+                disabled={showStatus}
+              />
+              <Button text="Submit" disabled={showStatus} />
             </Fragment>
           }
         />

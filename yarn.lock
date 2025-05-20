@@ -291,10 +291,10 @@
     "@eslint/core" "^0.13.0"
     levn "^0.4.1"
 
-"@figliolia/bottom-sheet@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@figliolia/bottom-sheet/-/bottom-sheet-1.6.0.tgz#6b827992f14f433a25ae3f7ceadb672b0f05100e"
-  integrity sha512-414VGILuZ27Qc6JLBGt5MXwSAupyJKbxUiVlsAKDKrDneSWjD9YRDwVrMtFwFWKQS3aWrzdJPt4/eODy1nqRMQ==
+"@figliolia/bottom-sheet@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@figliolia/bottom-sheet/-/bottom-sheet-1.6.1.tgz#7313083d36e3a928bf86c1f07778fc64452d306b"
+  integrity sha512-bsweTbsPZsSPO042G/Xakw5zfRPXOuwvMMzXlcbSIbDYLKLKRlTJdqd9Jewfv3w/HMAdngT9pSNYEnaZP76j5g==
   dependencies:
     "@figliolia/classnames" "^1.0.1"
     "@figliolia/drag-detector" "^1.0.7"
@@ -329,10 +329,10 @@
   resolved "https://registry.yarnpkg.com/@figliolia/event-emitter/-/event-emitter-1.1.6.tgz#77657da153875904f959aa9efe040a5874623274"
   integrity sha512-v8wNRuqTnYAsw89dxbWKKJT0E4TWP2rP7BRTE5PC2kBleQl9urfancLTWie3QdjMBGbs/sY+5XdTYoHyG1117w==
 
-"@figliolia/modal-stack@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@figliolia/modal-stack/-/modal-stack-1.1.0.tgz#922429421c6db9287ed2ae63785d2a370c0b1625"
-  integrity sha512-mc8n94WD208cT29gsFUZLyNGNLpZpC05rG+a8xe9r/IJqEeGeQ+FkGEjXlo9XNLrEyhV17hBX56N5QRWmUV8Vw==
+"@figliolia/modal-stack@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@figliolia/modal-stack/-/modal-stack-1.2.0.tgz#f08269989f79386d0cf10716c9dd01af13629857"
+  integrity sha512-3NlSxlzm1KFZIYfaXiDYy8w+e35kdAfRWWRR29k2iGfBt1cTLDy1D9GhfdYLxqieEIiRETG1Gni/UEt4ttadRg==
   dependencies:
     "@figliolia/data-structures" "^1.1.1"
 

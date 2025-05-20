@@ -35,7 +35,7 @@ export const ModalFormFooter = ({
             {loadingText ?? "Loading"}
           </LoadingText>
           <div className="error-text" aria-hidden={!error}>
-            <p role={!!error ? "alert" : undefined}>
+            <p role={!!error ? "alert" : undefined} aria-hidden={!error}>
               <Alert aria-hidden />
               {typeof error === "string"
                 ? error
@@ -46,10 +46,14 @@ export const ModalFormFooter = ({
               text="Try Again"
               onClick={resetState}
               disabled={!error}
+              aria-hidden={!error}
             />
           </div>
           <div className="success-text" aria-hidden={!success}>
-            <p role={success ? "alert" : undefined} aria-live="polite">
+            <p
+              role={success ? "alert" : undefined}
+              aria-live="polite"
+              aria-hidden={!success}>
               <Check aria-hidden />
               {successText ?? "Success"}
             </p>
@@ -58,6 +62,7 @@ export const ModalFormFooter = ({
               text="Close"
               onClick={onClose}
               disabled={!success}
+              aria-hidden={!success}
             />
           </div>
         </div>

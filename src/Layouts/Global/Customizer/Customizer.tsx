@@ -5,6 +5,7 @@ import {
   useCallback,
   useEffect,
   useId,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -66,6 +67,11 @@ export const Customizer = Suspended((_: Propless) => {
     }
   }, [params, toggle]);
 
+  const showStatus = useMemo(
+    () => status.success || !!status.error || status.loading,
+    [status],
+  );
+
   return (
     <BottomSheet
       open={open}
@@ -93,14 +99,19 @@ export const Customizer = Suspended((_: Propless) => {
           <TextArea required name="details" label="Any other details" />
           <ModalFormFooter
             {...status}
+            showStatus={showStatus}
             onClose={toggle.close}
             resetState={resetState}
             successText="Your request has been submitted"
-            showStatus={status.success || !!status.error || status.loading}
             actions={
               <Fragment>
-                <Button type="button" text="Cancel" onClick={toggle.close} />
-                <Button text="Submit" />
+                <Button
+                  type="button"
+                  text="Cancel"
+                  onClick={toggle.close}
+                  disabled={showStatus}
+                />
+                <Button text="Submit" disabled={showStatus} />
               </Fragment>
             }
           />

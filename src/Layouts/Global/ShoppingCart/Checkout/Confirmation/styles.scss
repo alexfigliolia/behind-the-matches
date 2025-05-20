@@ -1,8 +1,11 @@
-.panel.confirm {
-  padding-bottom: var(--layout-padding);
-  position: relative;
+.bottom-sheet.confirmation-sheet {
+  z-index: 301;
+  font-family: var(--font-funnel-display);
+  &>.sheet > .sheet-scroll-view {
+    padding: var(--layout-padding);
+  }
   & .closer {
-    top: 0;
+    top: 1em;
     right: 1em;
     position: absolute;
     z-index: 2;
@@ -11,7 +14,9 @@
     }
   }
   & h2 {
+    margin: 0;
     margin-bottom: 0.25em;
+    font-size: 2em;
   }
   & p {
     margin: 0;
