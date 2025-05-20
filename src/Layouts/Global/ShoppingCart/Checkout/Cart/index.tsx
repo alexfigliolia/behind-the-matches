@@ -102,7 +102,7 @@ export const Cart = Suspended((_: Propless) => {
               <Button
                 text="Checkout"
                 onClick={loadStripeCheckout}
-                disabled={!cartItems.length || elementsLoading}
+                disabled={!cartItems.length}
               />
             </Fragment>
           }
