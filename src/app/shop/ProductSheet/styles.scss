@@ -10,7 +10,7 @@
     &> .sheet-scroll-view {
       position: relative;
       overscroll-behavior: contain;
-      max-height: 95vh;
+      max-height: 87.5vh;
       padding-top: calc(var(--layout-padding) * 2);
       @media(min-width: 670px) {
         max-height: 90vh;
