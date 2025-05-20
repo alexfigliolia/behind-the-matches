@@ -1,23 +1,14 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import {
-  Fragment,
-  use,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { Fragment, use, useCallback, useEffect, useId, useState } from "react";
 import { useClassNames } from "@figliolia/classnames";
+import { useModalToggle } from "@figliolia/modal-stack";
 import { Button } from "Components/Button";
 import { Closer } from "Components/Closer";
 import { ModalFormFooter } from "Components/ModalFormFooter";
 import { Portal } from "Components/Portal";
 import { SplitText } from "Components/SplitText";
 import { Suspended } from "HOCs/Suspended";
-import { useFocusTrap } from "Hooks/useFocusTrap";
-import { useModalToggle } from "Hooks/useModalToggle";
 import { useReplaceSearchParams } from "Hooks/useReplaceSearchParams";
 import { useWindowSize } from "Hooks/useWindowSize";
 import { CartItem } from "Layouts/Global/CartItem";
@@ -31,7 +22,6 @@ export const Cart = Suspended((_: Propless) => {
   const replace = useReplaceSearchParams();
   const [_width, height] = useWindowSize();
   const [open, setOpen] = useState(false);
-  const container = useRef<HTMLDivElement>(null);
   const { cartItems, cartTotal, elementsLoading, loadStripeCheckout } =
     use(CheckoutContext);
 
@@ -59,17 +49,15 @@ export const Cart = Suspended((_: Propless) => {
 
   const classes = useClassNames("cart", { open });
 
-  useFocusTrap(container.current, open);
-
   return (
     <Portal>
       <div
         role="dialog"
-        ref={container}
         aria-hidden={!open}
         className={classes}
         aria-labelledby={titleID}
-        style={{ minHeight: height }}>
+        style={{ minHeight: height }}
+        ref={toggle.registerTrapNode}>
         <div className="content">
           <div className="title">
             <Closer aria-label="Close Shopping Cart" onClick={toggle.close} />

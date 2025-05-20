@@ -1,13 +1,13 @@
 "use client";
 import { useCallback, useEffect, useId, useState } from "react";
 import Stripe from "stripe";
+import { useModalToggle } from "@figliolia/modal-stack";
 import { AddToCartButton } from "Components/AddToCartButton";
 import { BottomSheet } from "Components/BottomSheet";
 import { Button } from "Components/Button";
 import { ProductPrice } from "Components/ProductPrice";
 import { Slider } from "Components/Slider";
 import { Suspended } from "HOCs/Suspended";
-import { useModalToggle } from "Hooks/useModalToggle";
 import { useReplaceSearchParams } from "Hooks/useReplaceSearchParams";
 import "./styles.scss";
 
@@ -51,7 +51,7 @@ export const ProductSheet = Suspended(({ product }: Props) => {
   return (
     <BottomSheet
       open={open}
-      close={toggle.close}
+      toggle={toggle}
       className="product-sheet"
       aria-labelledby={title}
       aria-describedby={selectedProduct?.description ? description : priceID}>

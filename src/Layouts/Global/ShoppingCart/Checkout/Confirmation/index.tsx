@@ -1,10 +1,10 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { Fragment, use, useCallback, useEffect, useId, useState } from "react";
+import { useModalToggle } from "@figliolia/modal-stack";
 import { BottomSheet } from "Components/BottomSheet";
 import { Closer } from "Components/Closer";
 import { Suspended } from "HOCs/Suspended";
-import { useModalToggle } from "Hooks/useModalToggle";
 import { useReplaceSearchParams } from "Hooks/useReplaceSearchParams";
 import { CartItem } from "Layouts/Global/CartItem";
 import { ShoppingCart } from "Tools/ShoppingCart";
@@ -72,7 +72,7 @@ export const Confirmation = Suspended((_: Propless) => {
   return (
     <BottomSheet
       open={open}
-      close={toggle.close}
+      toggle={toggle}
       className="confirmation-sheet"
       aria-labelledby={titleID}
       aria-describedby={descriptionID}>

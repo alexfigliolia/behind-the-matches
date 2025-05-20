@@ -1,41 +1,45 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import {
   BottomSheet as BottomSheetImpl,
   IBottomSheetProps,
   ISheetController,
 } from "@figliolia/bottom-sheet";
 import { useClassNames } from "@figliolia/classnames";
+import { ModalToggle } from "@figliolia/modal-stack";
 import { Portal } from "Components/Portal";
-import { useFocusTrap } from "Hooks/useFocusTrap";
 import "./styles.scss";
 
 export const BottomSheet = ({
+  toggle,
   children,
   className,
-  open,
   ...rest
-}: Omit<IBottomSheetProps, "dim" | "notch">) => {
+}: Props) => {
   const classes = useClassNames("btm-bottom-sheet", className);
-  const [container, setContainer] = useState<HTMLDivElement | null>(null);
 
-  const cacheNode = useCallback((ctrl: ISheetController | null) => {
-    setContainer(ctrl?.scrollView?.current ?? null);
-  }, []);
-
-  useFocusTrap(container, open);
+  const cacheRef = useCallback(
+    (ctrl: ISheetController | null) => {
+      toggle.registerTrapNode(ctrl?.scrollView?.current ?? null);
+    },
+    [toggle],
+  );
 
   return (
     <Portal>
       <BottomSheetImpl
         dim
         notch
-        open={open}
-        ref={cacheNode}
+        ref={cacheRef}
         className={classes}
+        close={toggle.close}
         {...rest}>
         {children}
       </BottomSheetImpl>
     </Portal>
   );
 };
+
+interface Props extends Omit<IBottomSheetProps, "dim" | "notch" | "close"> {
+  toggle: ModalToggle;
+}

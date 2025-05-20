@@ -25,7 +25,7 @@ export const StripeIntegration = Suspended((_: Propless) => {
   return (
     <BottomSheet
       open={open}
-      close={toggle.close}
+      toggle={toggle}
       className="checkout-sheet"
       aria-labelledby={titleID}>
       <div className="padded">

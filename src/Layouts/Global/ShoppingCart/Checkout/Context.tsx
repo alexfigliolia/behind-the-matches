@@ -9,11 +9,10 @@ import {
 } from "react";
 import IStripe from "stripe";
 import { ModalToggle } from "@figliolia/modal-stack";
+import { useModalToggle } from "@figliolia/modal-stack";
 import { Suspended } from "HOCs/Suspended";
-import { useModalToggle } from "Hooks/useModalToggle";
 import { useShoppingCart } from "Hooks/useShoppingCart";
 import { Currency } from "Tools/Currency";
-import { ModalStack } from "Tools/ModalStack";
 import { CartProduct } from "Types/Checkout";
 import { Callback } from "Types/Generics";
 import { OptionalChildren } from "Types/React";
@@ -33,7 +32,7 @@ export const CheckoutContext = createContext<ICheckoutContext>({
   cartTotal: "0.00",
   ...INITIAL_STATE,
   setState: () => {},
-  toggle: ModalStack.create(
+  toggle: new ModalToggle(
     () => {},
     () => {},
   ),

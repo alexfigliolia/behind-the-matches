@@ -8,10 +8,9 @@ import {
   useState,
 } from "react";
 import { useClassNames } from "@figliolia/classnames";
-import { ModalToggle } from "@figliolia/modal-stack";
+import { ModalToggle, useModalToggle } from "@figliolia/modal-stack";
 import { Closer } from "Components/Closer";
 import { Portal } from "Components/Portal";
-import { useModalToggle } from "Hooks/useModalToggle";
 import { Check } from "Icons/Check";
 import { Callback } from "Types/Generics";
 import "./styles.scss";

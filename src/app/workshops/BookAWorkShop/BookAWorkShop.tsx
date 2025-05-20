@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useModalToggle } from "@figliolia/modal-stack";
 import { BottomSheet } from "Components/BottomSheet";
 import { Button } from "Components/Button";
 import { Closer } from "Components/Closer";
@@ -17,7 +18,6 @@ import { Input } from "Components/Input";
 import { ModalFormFooter } from "Components/ModalFormFooter";
 import { TextArea } from "Components/TextArea";
 import { Suspended } from "HOCs/Suspended";
-import { useModalToggle } from "Hooks/useModalToggle";
 import { useNetlifyForm } from "Hooks/useNetlifyForm";
 import { useReplaceSearchParams } from "Hooks/useReplaceSearchParams";
 import { Propless } from "Types/React";
@@ -69,7 +69,7 @@ export const BookAWorkShop = Suspended((_: Propless) => {
   return (
     <BottomSheet
       open={open}
-      close={toggle.close}
+      toggle={toggle}
       className="book-a-workshop"
       aria-labelledby={title}>
       <Closer aria-label="Close Window" onClick={close} />

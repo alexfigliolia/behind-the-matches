@@ -1,8 +1,8 @@
 "use client";
 import { Fragment, useCallback, useState } from "react";
 import { useClassNames } from "@figliolia/classnames";
+import { useModalToggle } from "@figliolia/modal-stack";
 import { Navigation } from "Components/Navigation";
-import { useModalToggle } from "Hooks/useModalToggle";
 import { OptionalChildren } from "Types/React";
 import { MobileMenu } from "../MobileMenu";
 import { Burger } from "./Burger";

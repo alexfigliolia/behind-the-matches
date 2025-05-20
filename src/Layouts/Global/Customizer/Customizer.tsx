@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useModalToggle } from "@figliolia/modal-stack";
 import { BottomSheet } from "Components/BottomSheet";
 import { Button } from "Components/Button";
 import { Form, FormCTRL } from "Components/Form";
@@ -17,7 +18,6 @@ import { ModalFormFooter } from "Components/ModalFormFooter";
 import { Slider } from "Components/Slider";
 import { TextArea } from "Components/TextArea";
 import { Suspended } from "HOCs/Suspended";
-import { useModalToggle } from "Hooks/useModalToggle";
 import { useNetlifyForm } from "Hooks/useNetlifyForm";
 import { useReplaceSearchParams } from "Hooks/useReplaceSearchParams";
 import { GalleryImages } from "Tools/GalleryImages";
@@ -75,7 +75,7 @@ export const Customizer = Suspended((_: Propless) => {
   return (
     <BottomSheet
       open={open}
-      close={toggle.close}
+      toggle={toggle}
       className="customizer-sheet"
       aria-labelledby={title}
       aria-describedby={description}>
