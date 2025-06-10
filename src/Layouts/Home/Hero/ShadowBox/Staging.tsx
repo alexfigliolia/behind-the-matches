@@ -1,4 +1,5 @@
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import { RGBELoader } from "three-stdlib";
 import {
   Bounds,
   Center,
@@ -7,16 +8,22 @@ import {
   OnCenterCallbackProps,
   useBounds,
 } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
+import { Suspended } from "HOCs/Suspended";
 import { OptionalChildren } from "Types/React";
 
 const BASE_SPOT_LIGHT_POSITION = [0.5, 1.75, 1] as const;
 const BASE_POINT_LIGHT_POSITION = [-2, -0.5, -2] as const;
 
-export function Staging({ children }: OptionalChildren) {
+export const Staging = Suspended(function Staging({
+  children,
+}: OptionalChildren) {
   const [{ radius, height }, set] = useState({
     radius: 0,
     height: 0,
   });
+
+  useLoader(RGBELoader, "/lighting.hdr");
 
   const onCentered = useCallback((props: OnCenterCallbackProps) => {
     const { height, boundingSphere } = props;
@@ -68,7 +75,7 @@ export function Staging({ children }: OptionalChildren) {
       <Environment path="/" files="lighting.hdr" />
     </Fragment>
   );
-}
+});
 
 function Refit({ radius }: { radius: number }) {
   const api = useBounds();
@@ -79,3 +86,5 @@ function Refit({ radius }: { radius: number }) {
 
   return null;
 }
+
+useLoader.preload(RGBELoader, "/lighting.hdr");
