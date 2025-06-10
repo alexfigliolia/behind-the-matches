@@ -45,12 +45,12 @@ export function Staging({ children }: OptionalChildren) {
 
   return (
     <Fragment>
-      <ambientLight intensity={1} />
+      <ambientLight intensity={0.25} />
       <spotLight
         castShadow
         penumbra={1}
         position={spotLightPosition}
-        intensity={6}
+        intensity={100}
         shadow-bias={-0.0001}
         shadow-normalBias={0}
         shadow-mapSize={1024}
