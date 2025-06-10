@@ -1,5 +1,5 @@
 "use client";
-import { memo } from "react";
+import { memo, Suspense } from "react";
 import { Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Propless } from "Types/React";
@@ -13,12 +13,15 @@ export const ShadowBox = memo(
         shadows
         camera={{
           fov: 25,
-          zoom: 0.5,
+          zoom: 0.75,
           position: [-0.4, 0, 9],
         }}
+        gl={{ antialias: true, alpha: true }}
         aria-label="Three Dimensional View of a Behind The Matches Artwork">
-        <Scene />
-        <Preload all />
+        <Suspense>
+          <Preload all />
+          <Scene />
+        </Suspense>
       </Canvas>
     );
   },

@@ -1,3 +1,4 @@
+"use client";
 import { ForwardedRef, forwardRef, memo, useMemo } from "react";
 import { Group } from "three";
 import { Propless } from "Types/React";

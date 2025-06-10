@@ -22,7 +22,7 @@ const serwist = new Serwist({
   runtimeCaching: [
     ...defaultCache,
     {
-      matcher: /\.(?:hdr|glb)$/i,
+      matcher: /\.(?:hdr|exr|glb)$/i,
       handler: new CacheFirst({
         cacheName: "static-3d-assets",
         plugins: [

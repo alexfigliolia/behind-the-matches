@@ -1,5 +1,4 @@
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
-import { RGBELoader } from "three-stdlib";
 import {
   Bounds,
   Center,
@@ -8,26 +7,20 @@ import {
   OnCenterCallbackProps,
   useBounds,
 } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
-import { Suspended } from "HOCs/Suspended";
 import { OptionalChildren } from "Types/React";
 
 const BASE_SPOT_LIGHT_POSITION = [0.5, 1.75, 1] as const;
 const BASE_POINT_LIGHT_POSITION = [-2, -0.5, -2] as const;
 
-export const Staging = Suspended(function Staging({
-  children,
-}: OptionalChildren) {
-  const [{ radius, height }, set] = useState({
+export function Staging({ children }: OptionalChildren) {
+  const [{ radius, height }, setState] = useState({
     radius: 0,
     height: 0,
   });
 
-  useLoader(RGBELoader, "/lighting.hdr");
-
   const onCentered = useCallback((props: OnCenterCallbackProps) => {
     const { height, boundingSphere } = props;
-    set({ radius: boundingSphere.radius, height });
+    setState({ radius: boundingSphere.radius, height });
   }, []);
 
   const pointLightPosition = useMemo(
@@ -63,19 +56,17 @@ export const Staging = Suspended(function Staging({
         shadow-mapSize={1024}
       />
       <pointLight position={pointLightPosition} intensity={3} />
-      <Bounds fit clip margin={1} observe>
+      <Bounds fit clip observe margin={1}>
         <Refit radius={radius} />
-        <Center position={[0, 0, 0]} onCentered={onCentered}>
-          {children}
-        </Center>
+        <Center onCentered={onCentered}>{children}</Center>
       </Bounds>
       <group position={[0, -height / 2, 0]}>
         <ContactShadows scale={radius * 4} far={radius} blur={2} />
       </group>
-      <Environment path="/" files="lighting.hdr" />
+      <Environment path="/" files="lighting.exr" />
     </Fragment>
   );
-});
+}
 
 function Refit({ radius }: { radius: number }) {
   const api = useBounds();
@@ -86,5 +77,3 @@ function Refit({ radius }: { radius: number }) {
 
   return null;
 }
-
-useLoader.preload(RGBELoader, "/lighting.hdr");
