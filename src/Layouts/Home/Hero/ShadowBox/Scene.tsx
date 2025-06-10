@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { Group, Vector3 } from "three";
-import { OrbitControls, Preload } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { ShadowBoxModel } from "3D/ShadowBoxModel";
 import { Suspended } from "HOCs/Suspended";
@@ -66,7 +66,6 @@ export const Scene = Suspended((_: Propless) => {
       <Staging>
         <ShadowBoxModel ref={model} />
       </Staging>
-      <Preload all />
     </Fragment>
   );
 });

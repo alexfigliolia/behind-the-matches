@@ -1,5 +1,6 @@
 "use client";
 import { memo } from "react";
+import { Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Propless } from "Types/React";
 import { Scene } from "./Scene";
@@ -17,6 +18,7 @@ export const ShadowBox = memo(
         }}
         aria-label="Three Dimensional View of a Behind The Matches Artwork">
         <Scene />
+        <Preload all />
       </Canvas>
     );
   },
