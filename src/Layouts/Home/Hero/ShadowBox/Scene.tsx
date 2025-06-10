@@ -5,8 +5,10 @@ import { OrbitControls } from "@react-three/drei";
 import { ShadowBoxModel } from "3D/ShadowBoxModel";
 import { Propless } from "Types/React";
 import { Staging } from "./Staging";
+import { useZoom } from "./useZoom";
 
 export const Scene = (_: Propless) => {
+  useZoom();
   const model = useRef<Group>(null);
 
   useEffect(() => {
