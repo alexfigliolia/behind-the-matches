@@ -5152,6 +5152,13 @@ typescript@^5:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.8.3.tgz#92f8a3e5e3cf497356f4178c34cd65a7f5e8440e"
   integrity sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==
 
+ui-build-compression@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ui-build-compression/-/ui-build-compression-1.0.2.tgz#b3b59d1961e84bbc80361b2db5e6237de7cc1efb"
+  integrity sha512-crywm+W0yeaRUSQNMOb4x/GFXSYTvNKnhIgXoaMhWHTgfOORqIbZ8EfUwLtTchVj4Sv2DYj3v+8MHPwBnWmNlQ==
+  dependencies:
+    "@figliolia/child-process" "^1.0.4"
+
 unbox-primitive@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/unbox-primitive/-/unbox-primitive-1.1.0.tgz#8d9d2c9edeea8460c7f35033a88867944934d1e2"

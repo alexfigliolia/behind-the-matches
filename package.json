@@ -55,6 +55,7 @@
     "sass": "^1.87.0",
     "serwist": "^9.0.14",
     "tsx": "^4.19.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "ui-build-compression": "^1.0.2"
   }
 }
