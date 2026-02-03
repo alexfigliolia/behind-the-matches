@@ -1000,10 +1000,10 @@
     use-sync-external-store "^1.4.0"
     zustand "^5.0.3"
 
-"@repokit/core@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@repokit/core/-/core-1.0.2.tgz#99613be8c32da9aeb8aa32a0337c4025938c0e97"
-  integrity sha512-mZlS90MMSCk/zCiZ+ZgterR7n46ywFKnyGlKFK9MoFx8dYuSbtrjGHZ00CZSq6lukkaYHwKdVZaeb3qf9Nldhg==
+"@repokit/core@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@repokit/core/-/core-1.0.4.tgz#254146f3302aa298ffb96481bed49d3379a8f4cb"
+  integrity sha512-CWzCeYbhxYwmEAJay+xR+dkCGXZiw7VCMi1ZKClQl7Zf9toqNg7hwuL54+lDXCxhRtQ3DtEtnb5WsfpVRK1TVw==
   dependencies:
     "@figliolia/event-emitter" "^1.1.6"
     tsx "^4.21.0"
